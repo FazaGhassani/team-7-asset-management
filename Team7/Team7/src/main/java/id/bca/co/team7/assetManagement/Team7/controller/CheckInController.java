@@ -44,18 +44,17 @@ public class CheckInController {
         CheckIn checkIn = new CheckIn();
         if(!warehouseRepository.findById(checkInRequest.getWarehouse_id()).isEmpty()){
             if(!assetRepository.findById(checkInRequest.getAsset_id()).isEmpty()){
-                checkIn.setWarehouse(warehouseRepository.findWarehouseById(checkInRequest.getWarehouse_id()));
-                checkIn.setAsset(assetRepository.findAssetById(checkInRequest.getAsset_id()));
-                checkIn.setTanggal_masuk(new Date());
-                checkIn.setJumlah(checkInRequest.getJumlah());
-                return checkInRepository.save(checkIn);
-            }else{
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Asset Not Found!");
-            }
-        }
-        else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Warehouse Not Found!");
-        }
+                CheckIn a = new CheckIn();
+                a = checkInRepository.getCheckInByAsset_IdAndWarehouse_Id(checkInRequest.getAsset_id(), checkInRequest.getWarehouse_id());
+                if(a == null){ //pengecekan apakah sudah pernah insert atau belum
+                    checkIn.setWarehouse(warehouseRepository.findWarehouseById(checkInRequest.getWarehouse_id()));
+                    checkIn.setAsset(assetRepository.findAssetById(checkInRequest.getAsset_id()));
+                    checkIn.setTanggal_masuk(checkInRequest.getTanggal_masuk());
+                    checkIn.setJumlah(checkInRequest.getJumlah());
+                    return checkInRepository.save(checkIn);
+                }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Data CheckIn can be only one!");}
+            }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Asset Not Found!");}
+        }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Warehouse Not Found!");}
     }
 
     @PutMapping("checkins/{id}")
@@ -71,11 +70,11 @@ public class CheckInController {
                 checkIn.setJumlah(checkInRequest.getJumlah());
                 return checkInRepository.save(checkIn);
             }else{
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Asset Not Found!");
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Asset Not Found!");
             }
         }
         else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Warehouse Not Found!");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Warehouse Not Found!");
         }
     }
 }
