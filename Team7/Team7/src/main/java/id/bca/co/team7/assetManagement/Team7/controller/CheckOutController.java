@@ -3,6 +3,7 @@ package id.bca.co.team7.assetManagement.Team7.controller;
 import id.bca.co.team7.assetManagement.Team7.model.CheckOut;
 import id.bca.co.team7.assetManagement.Team7.model_request.CheckOutRequest;
 import id.bca.co.team7.assetManagement.Team7.repository.AssetRepository;
+import id.bca.co.team7.assetManagement.Team7.repository.CheckInRepository;
 import id.bca.co.team7.assetManagement.Team7.repository.CheckOutRepository;
 import id.bca.co.team7.assetManagement.Team7.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.Optional;
 public class CheckOutController {
     @Autowired
     CheckOutRepository checkOutRepository;
+
+    @Autowired
+    CheckInRepository checkInRepository;
 
     @Autowired
     AssetRepository assetRepository;
@@ -42,20 +46,19 @@ public class CheckOutController {
     @ResponseStatus(HttpStatus.OK)
     public CheckOut addAsset(@RequestBody CheckOutRequest checkOutRequest){
         CheckOut checkOut = new CheckOut();
-        if(!warehouseRepository.findById(checkOutRequest.getWarehouse_id()).isEmpty()){
-            if(!assetRepository.findById(checkOutRequest.getAsset_id()).isEmpty()){
-                checkOut.setWarehouse(warehouseRepository.findWarehouseById(checkOutRequest.getWarehouse_id()));
-                checkOut.setAsset(assetRepository.findAssetById(checkOutRequest.getAsset_id()));
-                checkOut.setTanggal_keluar(new Date());
-                checkOut.setJumlah(checkOutRequest.getJumlah());
-                return checkOutRepository.save(checkOut);
-            }else{
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Asset Not Found!");
-            }
-        }
-        else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Warehouse Not Found!");
-        }
+        if(!warehouseRepository.findById(checkOutRequest.getWarehouse_id()).isEmpty()){ //pengecekan warehouse
+            if(!assetRepository.findById(checkOutRequest.getAsset_id()).isEmpty()){ //pengcekan asset
+                int jmlCheckIn = checkInRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id());
+                int jmlCheckOut = checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id())+checkOutRequest.getJumlah();
+                if(jmlCheckIn >= jmlCheckOut){ //pengcekan apakah checkin > dari checout
+                    checkOut.setWarehouse(warehouseRepository.findWarehouseById(checkOutRequest.getWarehouse_id()));
+                    checkOut.setAsset(assetRepository.findAssetById(checkOutRequest.getAsset_id()));
+                    checkOut.setTanggal_keluar(new Date());
+                    checkOut.setJumlah(checkOutRequest.getJumlah());
+                    return checkOutRepository.save(checkOut);
+                }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient Total Amount of Jumlah CheckIn !");}
+            }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Asset Not Found!");}
+        }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Warehouse Not Found!");}
     }
 
     @PutMapping("checkouts/{id}")
@@ -65,17 +68,16 @@ public class CheckOutController {
         checkOut.setId(id);
         if(!warehouseRepository.findById(checkOutRequest.getWarehouse_id()).isEmpty()){
             if(!assetRepository.findById(checkOutRequest.getAsset_id()).isEmpty()){
-                checkOut.setWarehouse(warehouseRepository.findWarehouseById(checkOutRequest.getWarehouse_id()));
-                checkOut.setAsset(assetRepository.findAssetById(checkOutRequest.getAsset_id()));
-                checkOut.setTanggal_keluar(new Date());
-                checkOut.setJumlah(checkOutRequest.getJumlah());
-                return checkOutRepository.save(checkOut);
-            }else{
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Asset Not Found!");
-            }
-        }
-        else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Warehouse Not Found!");
-        }
+                int jmlCheckIn = checkInRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id());
+                int jmlCheckOut = checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id())+checkOutRequest.getJumlah();
+                if(jmlCheckIn >= jmlCheckOut){ //pengcekan apakah checkin > dari checout
+                    checkOut.setWarehouse(warehouseRepository.findWarehouseById(checkOutRequest.getWarehouse_id()));
+                    checkOut.setAsset(assetRepository.findAssetById(checkOutRequest.getAsset_id()));
+                    checkOut.setTanggal_keluar(new Date());
+                    checkOut.setJumlah(checkOutRequest.getJumlah());
+                    return checkOutRepository.save(checkOut);
+                }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient Total Amount of Jumlah CheckIn !");}
+            }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Asset Not Found!");}
+        }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Warehouse Not Found!");}
     }
 }

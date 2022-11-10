@@ -1,5 +1,7 @@
 package id.bca.co.team7.assetManagement.Team7.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
