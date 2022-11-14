@@ -39,17 +39,11 @@ public class AssetController {
     @ResponseStatus(HttpStatus.OK)
     public Asset addAsset(@RequestBody AssetRequest assetRequest){
         Asset asset = new Asset();
-        System.out.println(warehouseRepository.findWarehouseById(assetRequest.getWarehouse()));
-        if(!warehouseRepository.findById(assetRequest.getWarehouse()).isEmpty()){
-            asset.setWarehouse(warehouseRepository.findWarehouseById(assetRequest.getWarehouse()));
-            asset.setName(assetRequest.getName());
-            asset.setDescription(assetRequest.getDescription());
-            asset.setBarcode(assetRequest.getBarcode());
-            return assetRepository.save(asset);
-        }
-        else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found Warehouse");
-        }
+
+        asset.setName(assetRequest.getName());
+        asset.setDescription(assetRequest.getDescription());
+        asset.setBarcode(assetRequest.getBarcode());
+        return assetRepository.save(asset);
 
     }
 
@@ -58,15 +52,9 @@ public class AssetController {
     public Asset updateAsset(@PathVariable("id") int id, @RequestBody AssetRequest assetRequest){
         Asset asset = new Asset();
         asset.setId(id);
-        if(!warehouseRepository.findById(assetRequest.getWarehouse()).isEmpty()){
-            asset.setWarehouse(warehouseRepository.findWarehouseById(assetRequest.getWarehouse()));
-            asset.setName(assetRequest.getName());
-            asset.setDescription(assetRequest.getDescription());
-            asset.setBarcode(assetRequest.getBarcode());
-            return assetRepository.save(asset);
-        }
-        else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Not Found Warehouse");
-        }
+        asset.setName(assetRequest.getName());
+        asset.setDescription(assetRequest.getDescription());
+        asset.setBarcode(assetRequest.getBarcode());
+        return assetRepository.save(asset);
     }
 }

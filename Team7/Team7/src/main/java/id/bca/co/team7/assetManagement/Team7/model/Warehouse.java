@@ -16,10 +16,6 @@ public class Warehouse {
     @Column(name = "name")
     private String name;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "warehouse")
-    private List<Asset> assets;
-
     public int getId() {
         return id;
     }
@@ -34,13 +30,5 @@ public class Warehouse {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Asset> getAssets() {
-        return assets;
-    }
-
-    public void setAssets(List<Asset> assets) {
-        this.assets = assets;
     }
 }

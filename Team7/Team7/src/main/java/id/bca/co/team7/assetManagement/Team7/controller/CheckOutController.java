@@ -49,8 +49,10 @@ public class CheckOutController {
         if(!warehouseRepository.findById(checkOutRequest.getWarehouse_id()).isEmpty()){ //pengecekan warehouse
             if(!assetRepository.findById(checkOutRequest.getAsset_id()).isEmpty()){ //pengcekan asset
                 int jmlCheckIn = checkInRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id());
-                int jmlCheckOut = checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id())+checkOutRequest.getJumlah();
-                if(jmlCheckIn >= jmlCheckOut){ //pengcekan apakah checkin > dari checout
+                int jmlCheckOut = checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id()) != null ? checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id()) : 0 ;
+                System.out.println(jmlCheckIn);
+                System.out.println(jmlCheckOut);
+                if(jmlCheckIn >= (jmlCheckOut + checkOutRequest.getJumlah())){ //pengcekan apakah checkin > dari checout
                     checkOut.setWarehouse(warehouseRepository.findWarehouseById(checkOutRequest.getWarehouse_id()));
                     checkOut.setAsset(assetRepository.findAssetById(checkOutRequest.getAsset_id()));
                     checkOut.setTanggal_keluar(new Date());
