@@ -19,10 +19,6 @@ public class Asset {
     @Column(name = "barcode")
     private String barcode;
 
-    @ManyToOne
-    @JoinColumn(name = "warehouse_id")
-    private Warehouse warehouse;
-
     public int getId() {
         return id;
     }
@@ -55,11 +51,4 @@ public class Asset {
         this.barcode = barcode;
     }
 
-    public Warehouse getWarehouse() {
-        return warehouse;
-    }
-
-    public void setWarehouse(Warehouse warehouse) {
-        this.warehouse = warehouse;
-    }
 }
