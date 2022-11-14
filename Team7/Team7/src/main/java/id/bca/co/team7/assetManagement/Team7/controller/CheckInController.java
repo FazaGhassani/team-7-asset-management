@@ -34,6 +34,10 @@ public class CheckInController {
     @ResponseStatus(HttpStatus.OK)
     public Optional<CheckIn> findById(@PathVariable("id") int id){ return checkInRepository.findById(id);}
 
+    @GetMapping("checkins/asset/{id}/warehouse/{id2}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<CheckIn> getCheckInByAsset_IdAndWarehouse_Id(@PathVariable("id") int id, @PathVariable("id2") int id2){ return checkInRepository.getCheckInByAsset_IdAndWarehouse_Id(id,id2);}
+
     @DeleteMapping("checkins/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteCheckIn(@PathVariable("id") int id){ checkInRepository.deleteById(id);}
