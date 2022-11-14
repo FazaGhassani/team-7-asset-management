@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("api")
 public class AssetController {
 
@@ -26,6 +27,7 @@ public class AssetController {
     @GetMapping("assets")
     @ResponseStatus(HttpStatus.OK)
     public List<Asset> findAll(){ return assetRepository.findAll();}
+
 
     @GetMapping("assets/{id}")
     @ResponseStatus(HttpStatus.OK)
