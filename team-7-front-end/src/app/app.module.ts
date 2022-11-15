@@ -15,6 +15,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AssetAddComponent } from './asset-add/asset-add.component';
 import { WarehouseAddComponent } from './warehouse-add/warehouse-add.component';
 import { UserAddComponent } from './user-add/user-add.component';
+import { CheckinParentComponent } from './checkin-parent/checkin-parent.component';
+import { CheckoutParentComponent } from './checkout-parent/checkout-parent.component';
+import { CheckinChildComponent } from './checkin-child/checkin-child.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { UserAddComponent } from './user-add/user-add.component';
     NavbarComponent,
     AssetAddComponent,
     WarehouseAddComponent,
-    UserAddComponent
+    UserAddComponent,
+    CheckinParentComponent,
+    CheckoutParentComponent,
+    CheckinChildComponent
   ],
   imports: [
     BrowserModule,
