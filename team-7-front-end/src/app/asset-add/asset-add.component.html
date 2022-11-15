@@ -1,0 +1,98 @@
+<div class="row p-2 d-flex justify-content-center">
+
+
+    <div class="col card mb-3 shadow">
+        <div class="row card-body">
+            <div class="col-6">
+                <div class="row">
+                    <h4>{{namePage}}</h4>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <a routerLink="/">Asset</a>
+                        >
+                        <span>Add new</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 d-flex flex-row-reverse">
+                <button class="button button--pan" (click)="goBack()">
+                    <span>
+                        Back
+                    </span>
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="row p-2">
+    <div class="col card shadow p-3" [hidden]="submitted">
+        <h4 style="color: blue;">Add New Asset Form</h4>
+        <h6>Input your asset detail here</h6>
+        <br>
+        <form (ngSubmit)="onSubmit()" #assetForm="ngForm">
+            <div class="row form-group mb-3">
+                <div class="col-2">
+                    <label>Name</label>
+                </div>
+                <div class="col-10">
+                    <input type="text" class="form-control" id="name" required [(ngModel)]="modelAsset.name"
+                        placeholder="Plate" name="name" #name="ngModel" />
+                </div>
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>
+            <div class="row form-group mb-3">
+                <div class="col-2">
+                    <label>Description</label>
+                </div>
+                <div class="col-10">
+                    <input type="text" class="form-control" id="description" required
+                        [(ngModel)]="modelAsset.description" placeholder="This asset is imported from China"
+                        name="description" #description="ngModel" />
+                </div>
+                <div [hidden]="description.valid || description.pristine" class="alert alert-danger">
+                    Description is required
+                </div>
+            </div>
+            <div class="row form-group mb-3">
+                <div class="col-2">
+                    <label>Barcode</label>
+                </div>
+                <div class="col-10">
+                    <input type="text" class="form-control" id="barcode" required [(ngModel)]="modelAsset.barcode"
+                        placeholder="#018239482$21" name="barcode" #barcode="ngModel" />
+                </div>
+                <div [hidden]="barcode.valid || barcode.pristine" class="alert alert-danger">
+                    Barcode is required
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success" [disabled]="!assetForm.form.valid">
+                Submit
+            </button>
+        </form>
+    </div>
+    <div [hidden]="!submitted">
+        <h2>Berikut adalah data yang sudah anda kirim</h2>
+        <div class="row">
+            <div class="col-xs-3">Name</div>
+            <div class="col-xs-9">{{modelAsset.name}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Description</div>
+            <div class="col-xs-9">{{modelAsset.description}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Barcode</div>
+            <div class="col-xs-9">{{modelAsset.barcode}}</div>
+        </div>
+        <br>
+        <button type="button" class="btn btn-secondary" (click)="submitted=false">Back</button>
+    </div>
+</div>
