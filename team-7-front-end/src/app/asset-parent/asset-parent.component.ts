@@ -11,6 +11,7 @@ import { AssetService } from '../service/asset.service';
   styleUrls: ['./asset-parent.component.css']
 })
 export class AssetParentComponent implements OnInit {
+  namePage: string = "Asset Menu"
   asset: Asset[] = []
   constructor(private assetService: AssetService, private location: Location, private route: ActivatedRoute) { }
 

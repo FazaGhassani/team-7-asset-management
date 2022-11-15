@@ -10,9 +10,12 @@ export class AssetService {
   private assetUrl: string = 'http://localhost:8080/api/assets/'
   constructor(private http: HttpClient) { }
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa('admin:$2a$12$z7Bwr705Y6v9XWScJEtgFudDHW5pe.UdRcJFp0IdQMyk1LJl7kw2u') })
+    headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa('admin:ianianian') })
   }
   getAssets(): Observable<Asset[]> {
     return this.http.get<Asset[]>(this.assetUrl)
+  }
+  addAsset(asset: Asset): Observable<Asset> {
+    return this.http.post<Asset>(this.assetUrl, asset, this.httpOptions)
   }
 }

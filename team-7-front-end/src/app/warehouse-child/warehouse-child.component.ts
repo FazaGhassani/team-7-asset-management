@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Warehouse } from '../model/warehouse';
 
 @Component({
   selector: 'app-warehouse-child',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./warehouse-child.component.css']
 })
 export class WarehouseChildComponent implements OnInit {
-
+  @Input() warehouseChild!: Warehouse[]
   constructor() { }
 
   ngOnInit(): void {

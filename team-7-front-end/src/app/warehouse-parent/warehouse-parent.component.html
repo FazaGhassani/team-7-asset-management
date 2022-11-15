@@ -1,1 +1,29 @@
-<p>warehouse-parent works!</p>
+<div class="row p-2 d-flex justify-content-center">
+
+
+    <div class="col card mb-3 shadow">
+        <div class="row card-body">
+            <div class="col-6">
+                <div class="row">
+                    <h4>{{namePage}}</h4>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <a routerLink="/warehouse/">Warehouse</a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 d-flex flex-row-reverse">
+                <button class="button button--pan" routerLink="/warehouse-add/">
+                    <span>Add new Warehouse</span>
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<app-warehouse-child [warehouseChild]="warehouse"></app-warehouse-child>
