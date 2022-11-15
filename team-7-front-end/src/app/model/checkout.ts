@@ -5,7 +5,7 @@ export interface Checkout {
   id: number,
   asset: Asset,
   warehouse: Warehouse,
-  tangal_keluar: string,
+  tanggal_keluar: string,
   jumlah : number
 }
 
@@ -14,7 +14,7 @@ export class CheckoutModel {
     public name: string,
     public asset_id: number,
     public warehouse_id: number,
-    public tanggal_keluar : string,
+    public tangal_keluar : string,
     public jumlah : number
   ) { }
 }

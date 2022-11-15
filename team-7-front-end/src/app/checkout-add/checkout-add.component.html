@@ -7,23 +7,21 @@
         </div>
         <div class="row">
           <div class="col">
-            <a routerLink="/checkout/">Check-Out</a>
+
+            <a routerLink="/checkout">Check-Out</a>
+            >
+            <span>Add new</span>
           </div>
         </div>
       </div>
       <div class="col-6 d-flex flex-row-reverse">
-        <button type="button" class="btn btn-outline-dark" routerLink="/checkout-add/">
-          <span>Add New Check-Out</span>
+        <button type="button" class="btn btn-outline-dark" (click)="goBack()">
+                    <span>
+                        Back
+                    </span>
         </button>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row p-2 d-flex justify-content-center">
-  <div class="col card mb-3 shadow">
-    <div class="row card-body">
-      <app-checkout-child [checkoutInList]="checkouts"></app-checkout-child>
-    </div>
-  </div>
 </div>

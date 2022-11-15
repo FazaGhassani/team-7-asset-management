@@ -18,6 +18,9 @@ import { UserAddComponent } from './user-add/user-add.component';
 import { CheckinParentComponent } from './checkin-parent/checkin-parent.component';
 import { CheckoutParentComponent } from './checkout-parent/checkout-parent.component';
 import { CheckinChildComponent } from './checkin-child/checkin-child.component';
+import { CheckoutChildComponent } from './checkout-child/checkout-child.component';
+import { CheckoutAddComponent } from './checkout-add/checkout-add.component';
+import { CheckinAddComponent } from './checkin-add/checkin-add.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { CheckinChildComponent } from './checkin-child/checkin-child.component';
     UserAddComponent,
     CheckinParentComponent,
     CheckoutParentComponent,
-    CheckinChildComponent
+    CheckinChildComponent,
+    CheckoutChildComponent,
+    CheckoutAddComponent,
+    CheckinAddComponent
   ],
   imports: [
     BrowserModule,
