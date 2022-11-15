@@ -1,0 +1,65 @@
+<div class="row p-2 d-flex justify-content-center">
+
+
+    <div class="col card mb-3 shadow">
+        <div class="row card-body">
+            <div class="col-6">
+                <div class="row">
+                    <h4>{{namePage}}</h4>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <a routerLink="/warehouse">Warehouse</a>
+                        >
+                        <span>Add new</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 d-flex flex-row-reverse">
+                <button class="button button--pan" (click)="goBack()">
+                    <span>
+                        Back
+                    </span>
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="row p-2">
+    <div class="col card shadow p-3" [hidden]="submitted">
+        <h4 style="color: blue;">Add New Warehouse Form</h4>
+        <h6>Input your warehouse detail here</h6>
+        <br>
+        <form (ngSubmit)="onSubmit()" #warehouseForm="ngForm">
+            <div class="row form-group mb-3">
+                <div class="col-2">
+                    <label>Name</label>
+                </div>
+                <div class="col-10">
+                    <input type="text" class="form-control" id="name" required [(ngModel)]="modelWarehouse.name"
+                        placeholder="Warehouse A" name="name" #name="ngModel" />
+                </div>
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success" [disabled]="!warehouseForm.form.valid">
+                Submit
+            </button>
+        </form>
+    </div>
+    <div [hidden]="!submitted">
+        <h2>Berikut adalah data yang sudah anda kirim</h2>
+        <div class="row">
+            <div class="col-xs-3">Name</div>
+            <div class="col-xs-9">{{modelWarehouse.name}}</div>
+        </div>
+        <br>
+        <button type="button" class="btn btn-secondary" (click)="submitted=false">Back</button>
+    </div>
+</div>

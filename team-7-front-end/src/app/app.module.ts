@@ -13,6 +13,8 @@ import { UserParentComponent } from './user-parent/user-parent.component';
 import { UserChildComponent } from './user-child/user-child.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AssetAddComponent } from './asset-add/asset-add.component';
+import { WarehouseAddComponent } from './warehouse-add/warehouse-add.component';
+import { UserAddComponent } from './user-add/user-add.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { AssetAddComponent } from './asset-add/asset-add.component';
     UserParentComponent,
     UserChildComponent,
     NavbarComponent,
-    AssetAddComponent
+    AssetAddComponent,
+    WarehouseAddComponent,
+    UserAddComponent
   ],
   imports: [
     BrowserModule,

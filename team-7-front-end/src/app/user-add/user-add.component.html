@@ -1,0 +1,121 @@
+<div class="row p-2 d-flex justify-content-center">
+
+
+    <div class="col card mb-3 shadow">
+        <div class="row card-body">
+            <div class="col-6">
+                <div class="row">
+                    <h4>{{namePage}}</h4>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <a routerLink="/">User</a>
+                        >
+                        <span>Add new</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 d-flex flex-row-reverse">
+                <button class="button button--pan" (click)="goBack()">
+                    <span>
+                        Back
+                    </span>
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="row p-2">
+    <div class="col card shadow p-3" [hidden]="submitted">
+        <h4 style="color: blue;">Add New User Form</h4>
+        <h6>Input your user detail here</h6>
+        <br>
+        <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+            <div class="row form-group mb-3">
+                <div class="col-2">
+                    <label>Username</label>
+                </div>
+                <div class="col-10">
+                    <input type="text" class="form-control" id="username" required [(ngModel)]="modelUser.username"
+                        placeholder="Vincentius" name="username" #username="ngModel" />
+                </div>
+                <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+                    Username is required
+                </div>
+            </div>
+            <div class="row form-group mb-3">
+                <div class="col-2">
+                    <label>Password</label>
+                </div>
+                <div class="col-10">
+                    <input type="text" class="form-control" id="password" required [(ngModel)]="modelUser.password"
+                        placeholder="Plate" name="password" #password="ngModel" />
+                </div>
+                <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                    Password is required
+                </div>
+            </div>
+            <div class="row form-group mb-3">
+                <div class="col-2">
+                    <label>Role</label>
+                </div>
+                <!-- <div class="col-10">
+                    <input type="text" class="form-control" id="role" required [(ngModel)]="modelUser.role"
+                        placeholder="Plate" name="role" #role="ngModel" />
+                </div> -->
+                <div class="col-10">
+
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="modelUser.role"
+                        name="role" #role="ngModel">
+                        <option value="Admin">Admin</option>
+                        <option value="Guest">Guest</option>
+                    </select>
+                </div>
+                <div [hidden]="role.valid || role.pristine" class="alert alert-danger">
+                    Role is required
+                </div>
+            </div>
+            <div class="row form-group mb-3">
+                <div class="col-2">
+                    <label>Enabled</label>
+                </div>
+                <div class="col-10">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="modelUser.enabled"
+                        name="enabled" #enabled="ngModel">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </div>
+                <div [hidden]="enabled.valid || enabled.pristine" class="alert alert-danger">
+                    Enabled is required
+                </div>
+            </div>
+
+            <br>
+            <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">
+                Submit
+            </button>
+        </form>
+    </div>
+    <div [hidden]="!submitted">
+        <h2>Berikut adalah data yang sudah anda kirim</h2>
+        <div class="row">
+            <div class="col-xs-3">Name</div>
+            <div class="col-xs-9">{{modelUser.username}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Role</div>
+            <div class="col-xs-9">{{modelUser.role}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Enabled</div>
+            <div class="col-xs-9">{{modelUser.enabled}}</div>
+        </div>
+        <br>
+        <button type="button" class="btn btn-secondary" (click)="submitted=false">Back</button>
+    </div>
+</div>
