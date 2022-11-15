@@ -4,16 +4,21 @@ import id.bca.co.team7.assetManagement.Team7.model.User;
 import id.bca.co.team7.assetManagement.Team7.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("api")
 public class UserController {
     @Autowired
     UsersRepository usersRepository;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("users")
     @ResponseStatus(HttpStatus.OK)
@@ -30,6 +35,8 @@ public class UserController {
     @PostMapping("users")
     @ResponseStatus(HttpStatus.OK)
     public User addUser(@RequestBody User user){
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         return usersRepository.save(user);
     }
 
