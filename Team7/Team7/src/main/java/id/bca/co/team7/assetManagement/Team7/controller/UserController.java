@@ -1,6 +1,7 @@
 package id.bca.co.team7.assetManagement.Team7.controller;
 
 import id.bca.co.team7.assetManagement.Team7.model.User;
+import id.bca.co.team7.assetManagement.Team7.model_response.UserValidateResponse;
 import id.bca.co.team7.assetManagement.Team7.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,5 +46,11 @@ public class UserController {
     public User updateUser(@PathVariable("id") int id, @RequestBody User user){
         user.setId(id);
         return usersRepository.save(user);
+    }
+
+    @GetMapping(produces = "application/json")
+    @RequestMapping("/validateLogin")
+    public UserValidateResponse validateLogin() {
+        return new UserValidateResponse("User successfully authenticated");
     }
 }

@@ -1,0 +1,27 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Name Asset</th>
+            <th scope="col">Nama Warehouse</th>
+            <th scope="col">Jumlah Check In</th>
+            <th scope="col">Jumlah Check Out</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let report of reportChild; let indexOfelement=index">
+        <tr>
+            <th scope="row">{{indexOfelement+1}}</th>
+            <td>{{ report.asset }}</td>
+            <td>{{ report.warehouse }}</td>
+            <td>{{ report.jumlah_checkin }}</td>
+            <td>{{ report.jumlah_checkout }}</td>
+            <td>
+                <button type="detail" class="btn btn-outline-success mx-1" [routerLink]="['/report-detail/']"
+                    [queryParams]="{asset_id:report.asset_id, warehouse_id:report.warehouse_id}">
+                    DETAIL
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

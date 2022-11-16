@@ -3,15 +3,19 @@ package id.bca.co.team7.assetManagement.Team7.model_response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public interface ReportResponse {
-    @JsonProperty("AssetName")
+    @JsonProperty("asset")
     String getAssetName();
 
-    @JsonProperty("WarehouseName")
+    @JsonProperty("warehouse")
     String getWarehouseName();
 
-    @JsonProperty("JumlahCheckIn")
+    @JsonProperty("jumlah_checkin")
     String getCheckinJml();
 
-    @JsonProperty("JumlahCheckOut")
+    @JsonProperty("jumlah_checkout")
     String getCheckoutJml();
+    @JsonProperty("asset_id")
+    String getAssetId();
+    @JsonProperty("warehouse_id")
+    String getWarehouseId();
 }

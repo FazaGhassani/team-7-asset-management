@@ -9,8 +9,11 @@ import { AssetService } from '../service/asset.service';
 })
 export class AssetChildComponent implements OnInit {
   @Input() assetChild!: Asset[]
-  constructor() { }
-
+  constructor(private assetService: AssetService) { }
+  deleteAsset(id: number): void {
+    let index = this.assetChild.findIndex(d => d.id === id)
+    this.assetService.deleteAsset(id).subscribe(a => this.assetChild.splice(index, 1))
+  }
   ngOnInit(): void {
   }
 
