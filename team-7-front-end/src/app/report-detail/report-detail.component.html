@@ -1,0 +1,52 @@
+<div class="row p-2 d-flex justify-content-center">
+
+
+    <div class="col card mb-3 shadow">
+        <div class="row card-body">
+            <div class="col-6">
+                <div class="row">
+                    <h4>{{namePage}}</h4>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <a routerLink="/">Report</a>
+                        >
+                        Report Detail
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row p-2 d-flex">
+    <div class="card p-4 shadow">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Tipe</th>
+                    <th scope="col">Tanggal</th>
+                    <th scope="col">Name Asset</th>
+                    <th scope="col">Nama Warehouse</th>
+                    <th scope="col">Jumlah</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let report of reportDetail; let indexOfelement=index">
+                <tr>
+                    <th scope="row">{{indexOfelement+1}}</th>
+                    <td>{{ report.type }}</td>
+                    <td>{{ report.tanggal }}</td>
+                    <td>{{ report.asset }}</td>
+                    <td>{{ report.warehouse }}</td>
+                    <td>{{ report.jumlah }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

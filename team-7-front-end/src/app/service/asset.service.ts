@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AssetService {
-  private assetUrl: string = 'http://localhost:8080/api/assets/'
+  private assetUrl: string = 'http://localhost:8080/api/assets'
   constructor(private http: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa('admin:ianianian') })
@@ -17,5 +17,9 @@ export class AssetService {
   }
   addAsset(asset: Asset): Observable<Asset> {
     return this.http.post<Asset>(this.assetUrl, asset, this.httpOptions)
+  }
+  deleteAsset(id: number): Observable<Asset> {
+    const urlByID = `${this.assetUrl}/${id}`
+    return this.http.delete<Asset>(urlByID, this.httpOptions)
   }
 }
