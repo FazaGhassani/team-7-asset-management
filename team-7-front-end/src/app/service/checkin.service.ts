@@ -18,7 +18,19 @@ export class CheckinService {
     return this.http.get<Checkin[]>(this.checkinURL)
   }
 
+  getCheckinsByAssetIdandWarehouseId(asset_id : number, warehouse_id : number): Observable<Checkin>{
+    return this.http.get<Checkin>(this.checkinURL+'asset/'+ asset_id +'/warehouse/'+ warehouse_id);
+  }
+
   addChekin(checkin1: Checkin1): Observable<Checkin1> {
     return this.http.post<Checkin1>(this.checkinURL, checkin1, this.httpOptions)
+  }
+
+  editCheckin(checkin1 : Checkin1): Observable<Checkin1>{
+    return this.http.put<Checkin1>(this.checkinURL+checkin1.id, checkin1, this.httpOptions);
+  }
+
+  deleteCheckin(id : number): Observable<Checkin>{
+    return this.http.delete<Checkin>(this.checkinURL+id,  this.httpOptions);
   }
 }

@@ -3,6 +3,10 @@ import {Location} from "@angular/common";
 import {CheckinService} from "../service/checkin.service";
 import {Asset, AssetModel} from "../model/asset";
 import {Checkin, Checkin1, CheckinModel} from "../model/checkin";
+import {Warehouse} from "../model/warehouse";
+import { AssetService } from '../service/asset.service';
+import {WarehouseService} from "../service/warehouse.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-checkin-add',
@@ -11,12 +15,21 @@ import {Checkin, Checkin1, CheckinModel} from "../model/checkin";
 })
 export class CheckinAddComponent implements OnInit {
   namePage: string = "Add New Check-in Data"
-  checkin1s: Checkin1[] = []
-  modelCheckin = new CheckinModel(0, 0, 0,'',0)
+  checkin1s: Checkin1[] = [];
+  assets: Asset[] = [];
+  warehouses : Warehouse[] = [];
+  checkin : Checkin | undefined;
+  modelCheckin = new CheckinModel(0, 0, 0,'',0);
   submitted = false;
-  constructor(private checkinService: CheckinService, private location: Location) { }
+  isDataFound = false;
+
+  constructor(private checkinService: CheckinService, private assetService : AssetService,
+              private warehouseService : WarehouseService, private location: Location,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.getAssets();
+    this.getWarehouses();
   }
 
   onSubmit() {
@@ -31,15 +44,67 @@ export class CheckinAddComponent implements OnInit {
     tanggal_masuk : string= this.modelCheckin.tanggal_masuk,
     jumlah : number = this.modelCheckin.jumlah
   ): void {
-    //name = name.trim()
-    //if (!name || !description || !barcode) { return }
-    this.checkinService.addChekin({ id, asset_id, warehouse_id, tanggal_masuk, jumlah })
-      .subscribe(res => { this.checkin1s.push(res) })
-    this.checkin1s = []
+    console.log(this.checkin);
+    if(this.checkin == null){
+      this.checkinService.addChekin({ id, asset_id, warehouse_id, tanggal_masuk, jumlah })
+        .subscribe(res => { this.checkin1s.push(res) });
+    }else{
+      id = this.checkin.id;
+      this.checkinService.editCheckin({id, asset_id, warehouse_id, tanggal_masuk, jumlah})
+        .subscribe(res=> {})
+    }
+
+    //redirect
+    this.router.navigateByUrl('/checkin', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/checkin']);
+    });
+  }
+
+  getAssets(): void {
+    this.assetService.getAssets()
+      .subscribe(asst => {
+        this.assets = asst;
+    })
+  }
+
+  getWarehouses(): void {
+    this.warehouseService.getWarehouses()
+      .subscribe(wrh => {
+        this.warehouses = wrh;
+    })
+  }
+
+  validateNo(e: any): boolean{
+    const charCode = e.which ? e.which: e.keyCode;
+    if(charCode > 31 && (charCode < 48 || charCode > 57)){
+      return false
+    }
+    return true
+  }
+
+  showJumlah(){
+    this.isDataFound = true;
+  }
+
+  hideJumlah(){
+    this.isDataFound = false;
+  };
+
+  showContent(asset_id : number, warehouse_id : number){
+    this.checkinService.getCheckinsByAssetIdandWarehouseId(asset_id, warehouse_id)
+      .subscribe(res =>{
+        if(res != null){
+          this.modelCheckin.jumlah =  res.jumlah;
+          this.checkin = res;
+        }else{
+          this.modelCheckin.jumlah = 0;
+        }
+        this.showJumlah();
+      });
   }
 
   goBack(): void {
-    this.location.back()
+    this.location.back();
   }
 
 }
