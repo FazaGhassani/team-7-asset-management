@@ -8,6 +8,8 @@ import { WarehouseAddComponent } from './warehouse-add/warehouse-add.component';
 import { WarehouseParentComponent } from './warehouse-parent/warehouse-parent.component';
 import { CheckinParentComponent} from "./checkin-parent/checkin-parent.component";
 import { CheckoutParentComponent} from "./checkout-parent/checkout-parent.component";
+import {CheckinAddComponent} from "./checkin-add/checkin-add.component";
+import {CheckoutAddComponent} from "./checkout-add/checkout-add.component";
 
 const routes: Routes = [
   { path: '', component: AssetParentComponent },
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'user', component: UserParentComponent },
   { path: 'user-add', component: UserAddComponent },
   { path: 'checkin', component: CheckinParentComponent },
-  { path: 'chcekout', component: CheckoutParentComponent },
+  { path: 'checkin-add', component: CheckinAddComponent},
+  { path: 'checkout', component: CheckoutParentComponent },
+  { path: 'checkout-add', component: CheckoutAddComponent}
 ];
 
 @NgModule({
