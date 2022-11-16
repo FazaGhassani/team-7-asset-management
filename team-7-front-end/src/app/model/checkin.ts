@@ -9,9 +9,17 @@ export interface Checkin {
   jumlah : number
 }
 
+export interface Checkin1 {
+  id: number,
+  asset_id: number,
+  warehouse_id: number,
+  tanggal_masuk: string,
+  jumlah : number
+}
+
 export class CheckinModel {
   constructor(
-    public name: string,
+    public id: number,
     public asset_id: number,
     public warehouse_id: number,
     public tanggal_masuk : string,

@@ -3,6 +3,7 @@ import {Checkin} from "../model/checkin";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {CheckinService} from "../service/checkin.service";
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-checkin-parent',
@@ -24,7 +25,6 @@ export class CheckinParentComponent implements OnInit {
     this.checkinService.getCheckins()
       .subscribe(res => {
         this.checkins = res;
-        console.log(this.checkins);
       });
   }
 

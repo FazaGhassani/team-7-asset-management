@@ -17,10 +17,7 @@
     <td>{{ checkin.tanggal_masuk | date:'dd MMMM yyyy'}}</td>
     <td>{{ checkin.jumlah }}</td>
     <td>
-      <button type="update" class="btn btn-outline-success mx-1"> <!--(click)="update(freelancer.id)-->
-        UPDATE
-      </button>
-      <button type="delete" class="btn btn-outline-danger mx-1"><!--(click)="delete(freelancer.id)-->
+      <button type="delete" class="btn btn-outline-danger mx-1" (click)="deleteCheckin(checkin.id)">
         DELETE
       </button>
     </td>
