@@ -1,60 +1,72 @@
 import { Component, OnInit } from '@angular/core';
 import {Location} from "@angular/common";
-import {CheckoutService} from "../service/checkout.service";
 import {Checkout1, CheckoutModel} from "../model/checkout";
-import {Router} from "@angular/router";
-import {Asset} from "../model/asset";
-import {Warehouse} from "../model/warehouse";
+import {CheckoutService} from "../service/checkout.service";
 import {AssetService} from "../service/asset.service";
 import {WarehouseService} from "../service/warehouse.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Asset} from "../model/asset";
+import {Warehouse} from "../model/warehouse";
 
 @Component({
-  selector: 'app-checkout-add',
-  templateUrl: './checkout-add.component.html',
-  styleUrls: ['./checkout-add.component.css']
+  selector: 'app-checkout-update',
+  templateUrl: './checkout-update.component.html',
+  styleUrls: ['./checkout-update.component.css']
 })
-export class CheckoutAddComponent implements OnInit {
-  namePage: string = "Add New Check-out Data";
+export class CheckoutUpdateComponent implements OnInit {
+  namePage: string = "Update Check-out Data";
   modelCheckout = new CheckoutModel(0, 0, 0,'',0);
   assets: Asset[] = [];
   warehouses : Warehouse[] = [];
   checkout1s: Checkout1[] = [];
   submitted = false;
-  error : any;
+  idCheckout : any;
+
   constructor(private checkoutService: CheckoutService, private assetService : AssetService,
               private warehouseService : WarehouseService, private location: Location,
-              private router: Router) { }
+              private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getAssets();
     this.getWarehouses();
+    this.idCheckout = this.route.snapshot.paramMap.get('id'); //cara parsing
+    this.getCheckinById(this.idCheckout);
   }
 
-  onSubmit() {
-    this.submitted = true;
-    this.addCheckout();
+  getCheckinById(id : string){
+    try {
+      this.checkoutService.getCheckoutById(id).subscribe((res) => {
+        //this.freelancer = res;
+        this.modelCheckout.id = res.id;
+        this.modelCheckout.asset_id = res.asset.id;
+        this.modelCheckout.warehouse_id = res.warehouse.id;
+        this.modelCheckout.jumlah = res.jumlah;
+        this.modelCheckout.tanggal_keluar = res.tanggal_keluar;
+      });
+    } catch (e) {
+      alert("Data tidak bisa keluar");
+    }
   }
 
-  addCheckout(
+
+  updateCheckOut(
     id: number = this.modelCheckout.id,
     asset_id: number = this.modelCheckout.asset_id,
     warehouse_id: number = this.modelCheckout.warehouse_id,
     tanggal_keluar : string= this.modelCheckout.tanggal_keluar,
     jumlah : number = this.modelCheckout.jumlah
   ): void {
-    this.checkoutService.addChekout({id, asset_id, warehouse_id, tanggal_keluar, jumlah})
-      .subscribe(
-        res => {this.checkout1s.push(res)},
-        error => {
-          this.error = error;
-          console.log(this.error);
-          alert("ERROR! PASTIKAN DATA CHECKIN PADA ASSET DAN WAREHOUSE ADA!")
-        }
-      );
+    this.checkoutService.editCheckout({ id, asset_id, warehouse_id, tanggal_keluar, jumlah })
+      .subscribe(res => { this.checkout1s.push(res) });
     //redirect
-    this.router.navigateByUrl('/checkout', {skipLocationChange: true}).then(() => {
+    this.router.navigateByUrl('/checkout', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/checkout']);
     });
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    this.updateCheckOut();
   }
 
   getAssets(): void {
@@ -82,4 +94,5 @@ export class CheckoutAddComponent implements OnInit {
   goBack(): void {
     this.location.back()
   }
+
 }

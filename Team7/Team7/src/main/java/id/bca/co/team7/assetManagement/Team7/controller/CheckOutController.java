@@ -70,7 +70,7 @@ public class CheckOutController {
         if(!warehouseRepository.findById(checkOutRequest.getWarehouse_id()).isEmpty()){
             if(!assetRepository.findById(checkOutRequest.getAsset_id()).isEmpty()){
                 int jmlCheckIn = checkInRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id());
-                int jmlCheckOut = checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id())+checkOutRequest.getJumlah();
+                int jmlCheckOut = checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id()) != null ? checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id()) : 0 ;
                 if(jmlCheckIn >= jmlCheckOut){ //pengcekan apakah checkin > dari checout
                     checkOut.setWarehouse(warehouseRepository.findWarehouseById(checkOutRequest.getWarehouse_id()));
                     checkOut.setAsset(assetRepository.findAssetById(checkOutRequest.getAsset_id()));

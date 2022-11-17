@@ -14,7 +14,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./checkin-add.component.css']
 })
 export class CheckinAddComponent implements OnInit {
-  namePage: string = "Add New Check-in Data"
+  namePage: string = "Add/Update Check-In Data"
   checkin1s: Checkin1[] = [];
   assets: Asset[] = [];
   warehouses : Warehouse[] = [];

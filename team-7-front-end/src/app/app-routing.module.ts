@@ -9,6 +9,7 @@ import { CheckinParentComponent } from "./checkin-parent/checkin-parent.componen
 import { CheckoutParentComponent } from "./checkout-parent/checkout-parent.component";
 import { CheckinAddComponent } from "./checkin-add/checkin-add.component";
 import { CheckoutAddComponent } from "./checkout-add/checkout-add.component";
+import { CheckoutUpdateComponent } from './checkout-update/checkout-update.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { ReportParentComponent } from './report-parent/report-parent.component';
 import { ReportDetailComponent } from './report-detail/report-detail.component';
@@ -26,8 +27,10 @@ const routes: Routes = [
   { path: 'checkin', component: CheckinParentComponent },
   { path: 'checkin-add', component: CheckinAddComponent },
   { path: 'checkout', component: CheckoutParentComponent },
-  { path: 'checkout-add', component: CheckoutAddComponent }
-  // { path: 'login', component: LoginComponent }
+  { path: 'checkout-add', component: CheckoutAddComponent },
+  { path: 'checkout-update/:id', component: CheckoutUpdateComponent },
+  { path: 'login', component: LoginComponent }
+
 ];
 
 @NgModule({
