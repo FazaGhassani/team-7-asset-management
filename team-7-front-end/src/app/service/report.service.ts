@@ -9,8 +9,11 @@ import { Report, ReportDetail } from '../model/report';
 export class ReportService {
   private reportUrl: string = 'http://localhost:8080/api/reports/'
   constructor(private http: HttpClient) { }
+  username = localStorage.getItem('username')
+  password = localStorage.getItem('password')
+  token = this.username + ":" + this.password
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa('admin:ianianian') })
+    headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa(this.token) })
   }
   getReports(): Observable<Report[]> {
     return this.http.get<Report[]>(this.reportUrl)

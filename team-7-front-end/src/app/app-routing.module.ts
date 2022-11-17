@@ -26,8 +26,8 @@ const routes: Routes = [
   { path: 'checkin', component: CheckinParentComponent },
   { path: 'checkin-add', component: CheckinAddComponent },
   { path: 'checkout', component: CheckoutParentComponent },
-  { path: 'checkout-add', component: CheckoutAddComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'checkout-add', component: CheckoutAddComponent }
+  // { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
