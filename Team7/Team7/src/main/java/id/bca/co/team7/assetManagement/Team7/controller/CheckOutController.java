@@ -49,15 +49,17 @@ public class CheckOutController {
         CheckOut checkOut = new CheckOut();
         if(!warehouseRepository.findById(checkOutRequest.getWarehouse_id()).isEmpty()){ //pengecekan warehouse
             if(!assetRepository.findById(checkOutRequest.getAsset_id()).isEmpty()){ //pengcekan asset
-                int jmlCheckIn = checkInRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id());
-                int jmlCheckOut = checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id()) != null ? checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id()) : 0 ;
-                if(jmlCheckIn >= (jmlCheckOut + checkOutRequest.getJumlah())){ //pengcekan apakah checkin > dari checout
-                    checkOut.setWarehouse(warehouseRepository.findWarehouseById(checkOutRequest.getWarehouse_id()));
-                    checkOut.setAsset(assetRepository.findAssetById(checkOutRequest.getAsset_id()));
-                    checkOut.setTanggal_keluar(new Date());
-                    checkOut.setJumlah(checkOutRequest.getJumlah());
-                    return checkOutRepository.save(checkOut);
-                }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Insufficient Total Amount of Jumlah CheckIn !");}
+                if(!checkInRepository.getCheckInByAsset_IdAndWarehouse_Id(checkOutRequest.getAsset_id(), checkOutRequest.getWarehouse_id()).isEmpty()){
+                    int jmlCheckIn = checkInRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id());
+                    int jmlCheckOut = checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id()) != null ? checkOutRepository.getJumlahByAssetandWarehouse(checkOutRequest.getAsset_id(),checkOutRequest.getWarehouse_id()) : 0 ;
+                    if(jmlCheckIn >= (jmlCheckOut + checkOutRequest.getJumlah())) { //pengcekan apakah checkin > dari checout
+                        checkOut.setWarehouse(warehouseRepository.findWarehouseById(checkOutRequest.getWarehouse_id()));
+                        checkOut.setAsset(assetRepository.findAssetById(checkOutRequest.getAsset_id()));
+                        checkOut.setTanggal_keluar(new Date());
+                        checkOut.setJumlah(checkOutRequest.getJumlah());
+                        return checkOutRepository.save(checkOut);
+                    }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN,  "Insufficient Total Amount of Jumlah CheckIn !");}
+                }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No Asset Corelated with Warehouse!");}
             }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Asset Not Found!");}
         }else{throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Warehouse Not Found!");}
     }
