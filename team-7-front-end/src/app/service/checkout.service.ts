@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Checkout} from "../model/checkout";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Checkout } from "../model/checkout";
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,11 @@ import {Checkout} from "../model/checkout";
 export class CheckoutService {
   private checkoutURL: string = 'http://localhost:8080/api/checkouts/'
   constructor(private http: HttpClient) { }
-
+  username = localStorage.getItem('username')
+  password = localStorage.getItem('password')
+  token = this.username + ":" + this.password
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa('admin:ianianian') })
+    headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa(this.token) })
   }
 
   getCheckout(): Observable<Checkout[]> {

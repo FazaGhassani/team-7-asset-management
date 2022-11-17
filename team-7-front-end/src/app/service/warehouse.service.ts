@@ -9,8 +9,11 @@ import { Warehouse } from '../model/warehouse';
 export class WarehouseService {
   private warehouseUrl: string = 'http://localhost:8080/api/warehouses'
   constructor(private http: HttpClient) { }
+  username = localStorage.getItem('username')
+  password = localStorage.getItem('password')
+  token = this.username + ":" + this.password
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa('admin:ianianian') })
+    headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa(this.token) })
   }
   getWarehouses(): Observable<Warehouse[]> {
     return this.http.get<Warehouse[]>(this.warehouseUrl)

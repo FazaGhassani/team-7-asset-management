@@ -1,5 +1,13 @@
-<app-navbar></app-navbar>
+<span *ngIf="!this.loginService.isUserLoggedIn()">
 
-<div class="container py-2">
-  <router-outlet></router-outlet>
-</div>
+  <app-login></app-login>
+</span>
+
+<span *ngIf="this.loginService.isUserLoggedIn()">
+
+  <app-navbar></app-navbar>
+
+  <div class="container py-2">
+    <router-outlet></router-outlet>
+  </div>
+</span>
