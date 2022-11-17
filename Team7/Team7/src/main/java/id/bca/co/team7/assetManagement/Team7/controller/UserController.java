@@ -45,12 +45,18 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public User updateUser(@PathVariable("id") int id, @RequestBody User user){
         user.setId(id);
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         return usersRepository.save(user);
     }
 
     @GetMapping(produces = "application/json")
     @RequestMapping("/validateLogin")
-    public UserValidateResponse validateLogin() {
-        return new UserValidateResponse("User successfully authenticated");
+    public UserValidateResponse validateLogin(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password) {
+        if(usersRepository.findByUsername(username)!= null){
+            User user = usersRepository.findByUsername(username);
+            if(bCryptPasswordEncoder.matches(password,user.getPassword())) return new UserValidateResponse("User successfully authenticated");
+        }
+        return new UserValidateResponse("invalid");
     }
 }

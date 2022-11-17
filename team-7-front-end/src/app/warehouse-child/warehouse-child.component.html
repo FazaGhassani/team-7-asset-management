@@ -1,20 +1,15 @@
 <div class="row d-flex">
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
+                    <h5 class="modal-title" id="exampleModalLabel">Are You Sure To Delete ?</h5> <button type="button"
+                        class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                    <button type="button" class="btn btn-primary">DELETE</button>
                 </div>
             </div>
         </div>
@@ -25,13 +20,13 @@
                 <!-- <img src="./assets/images/photo2.jpg" alt="avatar" class="rounded-circle img-fluid mb-3 shadow"
                     style="width: 150px" /> -->
                 <div class="d-flex flex-row-reverse">
-                    <button class="" type="button" (click)="deleteWarehouse(warehouse.id)" data-toggle="modal"
-                        data-target="#exampleModalCenter"><i class="bi bi-x-lg"></i></button>
+                    <button class="" type="button" name="warehouse" [(ngModel)]="warehouse.id" #warehouse="ngModel"
+                        data-toggle="modal" data-target="#exampleModalCenter"><i class="bi bi-x-lg"></i></button>
 
                 </div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Launch demo modal
-                </button>
+                </a>
                 <h5>{{warehouse.name}}</h5>
                 <!-- <div class="d-flex view-contact bd-highlight">
                     <a class="text p-2 w-100 bd-highlight" routerLink="/freelancer-detail/{{freelancer.id}}">
