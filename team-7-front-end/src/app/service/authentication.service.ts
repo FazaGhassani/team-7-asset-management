@@ -23,19 +23,19 @@ export class AuthenticationService {
     return this.http.get<Auth>(this.authenticationUrl, this.httpOptions).pipe(
       map(
         userData => {
-          sessionStorage.setItem('username', username);
-          sessionStorage.setItem('password', password);
+          localStorage.setItem('username', username);
+          localStorage.setItem('password', password);
           return userData;
         }
       )
     )
   }
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('username')
+    let user = localStorage.getItem('username')
     return !(user === null)
   }
   logout() {
-    sessionStorage.removeItem('username')
-    sessionStorage.removeItem('password')
+    localStorage.removeItem('username')
+    localStorage.removeItem('password')
   }
 }

@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'checkout-add', component: CheckoutAddComponent },
   { path: 'checkout-update/:id', component: CheckoutUpdateComponent },
   { path: 'login', component: LoginComponent }
+
 ];
 
 @NgModule({

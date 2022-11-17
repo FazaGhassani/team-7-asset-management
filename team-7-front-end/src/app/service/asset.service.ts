@@ -9,8 +9,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AssetService {
   private assetUrl: string = 'http://localhost:8080/api/assets'
   constructor(private http: HttpClient) { }
+  username = localStorage.getItem('username')
+  password = localStorage.getItem('password')
+  token = this.username + ":" + this.password
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa('admin:ianianian') })
+    headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa(this.token) })
   }
   getAssets(): Observable<Asset[]> {
     return this.http.get<Asset[]>(this.assetUrl)
