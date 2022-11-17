@@ -53,7 +53,8 @@ export class CheckoutAddComponent implements OnInit {
           });},
         error => {
             if(error instanceof HttpErrorResponse){
-              alert("ERROR! PASTIKAN DATA CHECKIN PADA ASSET DAN WAREHOUSE ADA!")
+              //Swal.fire()
+              //alert("ERROR! PASTIKAN DATA CHECKIN PADA ASSET DAN WAREHOUSE ADA!");
             }
          }
       );
