@@ -24,6 +24,7 @@ import { CheckinAddComponent } from './checkin-add/checkin-add.component';
 import { ReportParentComponent } from './report-parent/report-parent.component';
 import { ReportChildComponent } from './report-child/report-child.component';
 import { ReportDetailComponent } from './report-detail/report-detail.component';
+import { CheckoutUpdateComponent } from './checkout-update/checkout-update.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ReportDetailComponent } from './report-detail/report-detail.component';
     CheckinAddComponent,
     ReportParentComponent,
     ReportChildComponent,
-    ReportDetailComponent
+    ReportDetailComponent,
+    CheckoutUpdateComponent
   ],
   imports: [
     BrowserModule,

@@ -7,9 +7,10 @@
         </div>
         <div class="row">
           <div class="col">
-            <a routerLink="/checkin">Check-In</a>
+
+            <a routerLink="/checkout">Check-Out</a>
             >
-            <span>Add/Update</span>
+            <span>Update Check-In</span>
           </div>
         </div>
       </div>
@@ -25,14 +26,14 @@
 </div>
 <div class="row p-2">
   <div class="col card shadow p-3" [hidden]="submitted">
-    <h4 style="color: blue;">Add/Update Check-In Form</h4>
-    <h6>Input your Check-In detail here</h6>
+    <h4 style="color: blue;">Update Check-Out Form</h4>
+    <h6>Input your Check-Out detail here</h6>
     <br>
-    <form (ngSubmit)="onSubmit()" #checkinForm="ngForm">
+    <form (ngSubmit)="onSubmit()" #checkoutForm="ngForm">
       <div class="row form-group py-1">
         <div class="col-5">
           <label for="asset_id">Asset</label>
-          <select id="asset_id" class="form-control" required [(ngModel)]="modelCheckin.asset_id" name="asset_id" #asset_id="ngModel" (click)="hideJumlah()">
+          <select id="asset_id" class="form-control" required [(ngModel)]="modelCheckout.asset_id" name="asset_id" #asset_id="ngModel">
             <option *ngFor="let asset of assets" [value]="asset.id" >{{asset.name}}</option>
           </select>
           <div [hidden]="asset_id.valid || asset_id.pristine" class="alert alert-danger">
@@ -41,28 +42,23 @@
         </div>
         <div class="col-5">
           <label for="warehouse_id">Warehouse</label>
-          <select id="warehouse_id" class="form-control" required [(ngModel)]="modelCheckin.warehouse_id" name="warehouse_id" #warehouse_id="ngModel" (click)="hideJumlah()">
+          <select id="warehouse_id" class="form-control" required [(ngModel)]="modelCheckout.warehouse_id" name="warehouse_id" #warehouse_id="ngModel">
             <option *ngFor="let warehouse of warehouses" [value]="warehouse.id" >{{warehouse.name}}</option>
           </select>
           <div [hidden]="warehouse_id.valid || warehouse_id.pristine" class="alert alert-danger">
             Warehouse is required
           </div>
         </div>
-        <div class="col-2 py-4" >
-          <button type="button" (click)="showContent(modelCheckin.asset_id, modelCheckin.warehouse_id)" class="btn btn-outline-secondary" [disabled]="warehouse_id.pristine">
-            Check
-          </button>
-        </div>
       </div>
-      <div *ngIf='isDataFound' class="row form-group py-1">
+      <div class="row form-group py-1">
         <div class="col-5">
           <label for="jumlah">Jumlah</label>
-          <input type="text" maxlength="8" (keypress)="validateNo($event)" class="form-control" id="jumlah" required [(ngModel)]="modelCheckin.jumlah" name="jumlah" #jumlah="ngModel"/>
+          <input type="text" maxlength="8" (keypress)="validateNo($event)" class="form-control" id="jumlah" required [(ngModel)]="modelCheckout.jumlah" name="jumlah" #jumlah="ngModel"/>
           <div [hidden]="jumlah.valid || jumlah.pristine" class="alert alert-danger">
             Jumlah is required
           </div>
           <div class="col-2 py-3" >
-            <button type="submit" class="btn btn-success" [disabled]="!checkinForm.form.valid || modelCheckin.jumlah < 1">
+            <button type="submit" class="btn btn-success" [disabled]="!checkoutForm.form.valid || modelCheckout.jumlah < 1">
               Submit
             </button>
           </div>
