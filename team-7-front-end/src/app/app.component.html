@@ -1,10 +1,8 @@
 <span *ngIf="!this.loginService.isUserLoggedIn()">
-
   <app-login></app-login>
 </span>
 
 <span *ngIf="this.loginService.isUserLoggedIn()">
-
   <app-navbar></app-navbar>
 
   <div class="container py-2">
