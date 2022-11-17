@@ -18,13 +18,15 @@ export class CheckinChildComponent {
 
   //untuk delete ke API
   deleteCheckin(id: number):void{
-    this.checkinService.deleteCheckin(id)
-      .subscribe(res =>{
-          this.chekinInList.forEach((checkin,index)=>{
-            if(checkin.id==id) this.chekinInList.splice(index, 1);
-          });
-        }
-      )
+    if(confirm("Are you sure you want to delete this data ?")){
+      this.checkinService.deleteCheckin(id)
+        .subscribe(res =>{
+            this.chekinInList.forEach((checkin,index)=>{
+              if(checkin.id==id) this.chekinInList.splice(index, 1);
+            });
+          }
+        )
+    }
   }
 
 }
