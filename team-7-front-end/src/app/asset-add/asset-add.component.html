@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="col-6 d-flex flex-row-reverse">
-                <button class="button button--pan" (click)="goBack()">
+                <button class="btn btn-outline-dark" (click)="goBack()">
                     <span>
                         Back
                     </span>
@@ -65,7 +65,7 @@
                     <label>Barcode</label>
                 </div>
                 <div class="col-10">
-                    <input type="text" maxlength="8" class="form-control" id="barcode" required
+                    <input type="text" maxlength="15" class="form-control" id="barcode" required
                         [(ngModel)]="modelAsset.barcode" placeholder="max 8 character" name="barcode"
                         #barcode="ngModel" />
                 </div>

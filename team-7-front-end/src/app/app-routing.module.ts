@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { AssetEditComponent } from './asset-edit/asset-edit.component';
 import { WarehouseEditComponent } from './warehouse-edit/warehouse-edit.component';
 import { AuthguardService } from './service/authguard.service';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 const routes: Routes = [
   { path: '', component: ReportParentComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'warehouse-update/:id', component: WarehouseEditComponent, canActivate: [AuthguardService] },
   { path: 'user', component: UserParentComponent, canActivate: [AuthguardService] },
   { path: 'user-add', component: UserAddComponent, canActivate: [AuthguardService] },
+  { path: 'user-update/:id', component: UserEditComponent, canActivate: [AuthguardService] },
   { path: 'checkin', component: CheckinParentComponent, canActivate: [AuthguardService] },
   { path: 'checkin-add', component: CheckinAddComponent, canActivate: [AuthguardService] },
   { path: 'checkout', component: CheckoutParentComponent, canActivate: [AuthguardService] },

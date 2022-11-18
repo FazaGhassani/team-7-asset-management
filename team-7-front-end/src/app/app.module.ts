@@ -27,6 +27,7 @@ import { ReportDetailComponent } from './report-detail/report-detail.component';
 import { CheckoutUpdateComponent } from './checkout-update/checkout-update.component';
 import { AssetEditComponent } from './asset-edit/asset-edit.component';
 import { WarehouseEditComponent } from './warehouse-edit/warehouse-edit.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { WarehouseEditComponent } from './warehouse-edit/warehouse-edit.componen
     ReportDetailComponent,
     CheckoutUpdateComponent,
     AssetEditComponent,
-    WarehouseEditComponent
+    WarehouseEditComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,

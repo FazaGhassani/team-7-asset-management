@@ -1,20 +1,22 @@
 <div class="row d-flex">
     <div class="col-4 p-2" *ngFor="let user of userChild">
         <div class="card p-2 shadow">
-            <div class="card-body text-center">
-                <img src="./assets/user.png" alt="avatar" class="rounded-circle img-fluid mb-3 shadow"
-                    style="width: 150px" />
-                <h5>{{user.username}}</h5>
-                <p>{{user.role}}</p>
-                <p>{{user.enabled}}</p>
-                <!-- <div class="d-flex view-contact bd-highlight">
-                    <a class="text p-2 w-100 bd-highlight" routerLink="/freelancer-detail/{{freelancer.id}}">
-                        VIEW PROFILE
-                    </a>
-                    <button class="p-2 flex-shrink-1 bd-highlight" type="button"
-                        (click)="deleteFreelancer(freelancer.id)">DELETE</button>
-
-                </div> -->
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="d-flex flex-row-reverse">
+                        <button class="btn btn-outline-danger mx-1" type="button" (click)="deleteUser(user.id)"><i
+                                class="bi bi-x-lg"></i></button>
+                    </div>
+                    <img src="./assets/user.png" alt="avatar" class="rounded-circle img-fluid mb-3 shadow"
+                        style="width: 150px" />
+                    <h5>{{user.username}}</h5>
+                </div>
+                <p>Role : {{user.role}}</p>
+                <div class="text-center">
+                    <button type="update" class="btn btn-outline-success mx-1" (click)="update(user.id)">
+                        UPDATE
+                    </button>
+                </div>
             </div>
         </div>
         <!-- <a routerLink="/freelancer-detail/{{cont.id}}"></a> -->
