@@ -7,7 +7,7 @@ import { User } from '../model/user';
   providedIn: 'root'
 })
 export class UserService {
-  private userUrl: string = 'http://localhost:8080/api/users/'
+  private userUrl: string = 'http://localhost:8080/api/users'
   constructor(private http: HttpClient) { }
   username = localStorage.getItem('username')
   password = localStorage.getItem('password')
@@ -20,5 +20,15 @@ export class UserService {
   }
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.userUrl, user, this.httpOptions)
+  }
+  deleteUser(id: number): Observable<User> {
+    const urlByID = `${this.userUrl}/${id}`
+    return this.http.delete<User>(urlByID, this.httpOptions)
+  }
+  editUser(user: User): Observable<User> {
+    return this.http.put<User>(this.userUrl + '/' + user.id, user, this.httpOptions);
+  }
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(this.userUrl + '/' + id, this.httpOptions);
   }
 }

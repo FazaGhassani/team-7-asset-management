@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Checkout} from "../model/checkout";
-import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
-import {CheckoutService} from "../service/checkout.service";
+import { Checkout } from "../model/checkout";
+import { Location } from "@angular/common";
+import { ActivatedRoute } from "@angular/router";
+import { CheckoutService } from "../service/checkout.service";
 
 @Component({
   selector: 'app-checkout-parent',
@@ -11,7 +11,7 @@ import {CheckoutService} from "../service/checkout.service";
 })
 export class CheckoutParentComponent implements OnInit {
   namePage: string = "Check-Out Menu";
-  checkouts : Checkout[] = [];
+  checkouts: Checkout[] = [];
   constructor(private checkoutService: CheckoutService, private location: Location, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -23,7 +23,6 @@ export class CheckoutParentComponent implements OnInit {
     this.checkoutService.getCheckout()
       .subscribe(res => {
         this.checkouts = res;
-        console.log(this.checkouts);
       });
   }
 }

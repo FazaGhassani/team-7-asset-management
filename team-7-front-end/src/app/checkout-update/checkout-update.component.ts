@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {Location} from "@angular/common";
-import {Checkout1, CheckoutModel} from "../model/checkout";
-import {CheckoutService} from "../service/checkout.service";
-import {AssetService} from "../service/asset.service";
-import {WarehouseService} from "../service/warehouse.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Asset} from "../model/asset";
-import {Warehouse} from "../model/warehouse";
+import { Location } from "@angular/common";
+import { Checkout1, CheckoutModel } from "../model/checkout";
+import { CheckoutService } from "../service/checkout.service";
+import { AssetService } from "../service/asset.service";
+import { WarehouseService } from "../service/warehouse.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Asset } from "../model/asset";
+import { Warehouse } from "../model/warehouse";
 
 @Component({
   selector: 'app-checkout-update',
@@ -15,16 +15,16 @@ import {Warehouse} from "../model/warehouse";
 })
 export class CheckoutUpdateComponent implements OnInit {
   namePage: string = "Update Check-out Data";
-  modelCheckout = new CheckoutModel(0, 0, 0,'',0);
+  modelCheckout = new CheckoutModel(0, 0, 0, '', 0);
   assets: Asset[] = [];
-  warehouses : Warehouse[] = [];
+  warehouses: Warehouse[] = [];
   checkout1s: Checkout1[] = [];
   submitted = false;
-  idCheckout : any;
+  idCheckout: any;
 
-  constructor(private checkoutService: CheckoutService, private assetService : AssetService,
-              private warehouseService : WarehouseService, private location: Location,
-              private router: Router, private route: ActivatedRoute) { }
+  constructor(private checkoutService: CheckoutService, private assetService: AssetService,
+    private warehouseService: WarehouseService, private location: Location,
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getAssets();
@@ -33,7 +33,7 @@ export class CheckoutUpdateComponent implements OnInit {
     this.getCheckinById(this.idCheckout);
   }
 
-  getCheckinById(id : string){
+  getCheckinById(id: string) {
     try {
       this.checkoutService.getCheckoutById(id).subscribe((res) => {
         //this.freelancer = res;
@@ -53,17 +53,18 @@ export class CheckoutUpdateComponent implements OnInit {
     id: number = this.modelCheckout.id,
     asset_id: number = this.modelCheckout.asset_id,
     warehouse_id: number = this.modelCheckout.warehouse_id,
-    tanggal_keluar : string= this.modelCheckout.tanggal_keluar,
-    jumlah : number = this.modelCheckout.jumlah
+    tanggal_keluar: string = this.modelCheckout.tanggal_keluar,
+    jumlah: number = this.modelCheckout.jumlah
   ): void {
     this.checkoutService.editCheckout({ id, asset_id, warehouse_id, tanggal_keluar, jumlah })
-      .subscribe(res => { this.checkout1s.push(res) });
-    //redirect
-    this.router.navigateByUrl('/checkout', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/checkout']);
-    });
-  }
+      .subscribe(res => { this.checkout1s.push(res); this.redirectTo('/checkout') },
+        err => { alert("ERROR! Mohon dicek kembali"); this.redirectTo('/checkout-update/' + id) });
 
+  }
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([uri]));
+  }
   onSubmit() {
     this.submitted = true;
     this.updateCheckOut();
@@ -83,9 +84,9 @@ export class CheckoutUpdateComponent implements OnInit {
       })
   }
 
-  validateNo(e: any): boolean{
-    const charCode = e.which ? e.which: e.keyCode;
-    if(charCode > 31 && (charCode < 48 || charCode > 57)){
+  validateNo(e: any): boolean {
+    const charCode = e.which ? e.which : e.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false
     }
     return true

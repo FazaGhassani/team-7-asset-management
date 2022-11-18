@@ -4,6 +4,7 @@ export interface Warehouse {
 }
 export class WarehouseModel {
     constructor(
+        public id: number,
         public name: string
     ) { }
 }

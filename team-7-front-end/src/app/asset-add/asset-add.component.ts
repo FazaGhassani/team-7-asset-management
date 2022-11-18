@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 export class AssetAddComponent implements OnInit {
   namePage: string = "Form Add new Asset"
   asset: Asset[] = []
-  modelAsset = new AssetModel('', '', '')
+  modelAsset = new AssetModel(0, '', '', '')
   submitted = false;
   constructor(private assetService: AssetService, private location: Location) { }
 
@@ -23,6 +23,7 @@ export class AssetAddComponent implements OnInit {
     this.addAsset();
   }
   addAsset(
+    id: number = this.modelAsset.id,
     name: string = this.modelAsset.name,
     description: string = this.modelAsset.description,
     barcode: string = this.modelAsset.barcode
@@ -31,7 +32,7 @@ export class AssetAddComponent implements OnInit {
     description = description.trim()
     barcode = barcode.trim()
     if (!name || !description || !barcode) { return }
-    this.assetService.addAsset({ name, description, barcode } as Asset).subscribe(asst => { this.asset.push(asst) })
+    this.assetService.addAsset({ id, name, description, barcode } as Asset).subscribe(asst => { this.asset.push(asst) })
     this.asset = []
   }
   goBack(): void {

@@ -14,21 +14,28 @@ import { UserAddComponent } from './user-add/user-add.component';
 import { ReportParentComponent } from './report-parent/report-parent.component';
 import { ReportDetailComponent } from './report-detail/report-detail.component';
 import { LoginComponent } from './login/login.component';
+import { AssetEditComponent } from './asset-edit/asset-edit.component';
+import { WarehouseEditComponent } from './warehouse-edit/warehouse-edit.component';
+import { AuthguardService } from './service/authguard.service';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 const routes: Routes = [
   { path: '', component: ReportParentComponent },
   { path: 'report-detail', component: ReportDetailComponent },
-  { path: 'asset', component: AssetParentComponent },
-  { path: 'asset-add', component: AssetAddComponent },
-  { path: 'warehouse', component: WarehouseParentComponent },
-  { path: 'warehouse-add', component: WarehouseAddComponent },
-  { path: 'user', component: UserParentComponent },
-  { path: 'user-add', component: UserAddComponent },
-  { path: 'checkin', component: CheckinParentComponent },
-  { path: 'checkin-add', component: CheckinAddComponent },
-  { path: 'checkout', component: CheckoutParentComponent },
-  { path: 'checkout-add', component: CheckoutAddComponent },
-  { path: 'checkout-update/:id', component: CheckoutUpdateComponent },
+  { path: 'asset', component: AssetParentComponent, canActivate: [AuthguardService] },
+  { path: 'asset-add', component: AssetAddComponent, canActivate: [AuthguardService] },
+  { path: 'asset-update/:id', component: AssetEditComponent, canActivate: [AuthguardService] },
+  { path: 'warehouse', component: WarehouseParentComponent, canActivate: [AuthguardService] },
+  { path: 'warehouse-add', component: WarehouseAddComponent, canActivate: [AuthguardService] },
+  { path: 'warehouse-update/:id', component: WarehouseEditComponent, canActivate: [AuthguardService] },
+  { path: 'user', component: UserParentComponent, canActivate: [AuthguardService] },
+  { path: 'user-add', component: UserAddComponent, canActivate: [AuthguardService] },
+  { path: 'user-update/:id', component: UserEditComponent, canActivate: [AuthguardService] },
+  { path: 'checkin', component: CheckinParentComponent, canActivate: [AuthguardService] },
+  { path: 'checkin-add', component: CheckinAddComponent, canActivate: [AuthguardService] },
+  { path: 'checkout', component: CheckoutParentComponent, canActivate: [AuthguardService] },
+  { path: 'checkout-add', component: CheckoutAddComponent, canActivate: [AuthguardService] },
+  { path: 'checkout-update/:id', component: CheckoutUpdateComponent, canActivate: [AuthguardService] },
   { path: 'login', component: LoginComponent }
 
 ];

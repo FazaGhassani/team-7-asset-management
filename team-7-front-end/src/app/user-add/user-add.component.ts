@@ -11,7 +11,7 @@ import { UserService } from '../service/user.service';
 export class UserAddComponent implements OnInit {
   namePage: string = "Form Add new User"
   user: User[] = []
-  modelUser = new UserModel('', '', 'admin', true)
+  modelUser = new UserModel(0, '', '', 'admin')
   submitted = false;
   constructor(private userService: UserService, private location: Location) { }
 
@@ -25,16 +25,16 @@ export class UserAddComponent implements OnInit {
   }
 
   addUser(
+    id: number = this.modelUser.id,
     username: string = this.modelUser.username,
     password: string = this.modelUser.password,
-    role: string = this.modelUser.role,
-    enabled: boolean = this.modelUser.enabled
+    role: string = this.modelUser.role
   ): void {
     username = username.trim()
     password = password.trim()
     role = role.trim()
     if (!username || !password || !role) { return }
-    this.userService.addUser({ username, password, role, enabled } as User).subscribe(usr => { this.user.push(usr) })
+    this.userService.addUser({ id, username, password, role } as User).subscribe(usr => { this.user.push(usr) })
     this.user = []
   }
   goBack(): void {

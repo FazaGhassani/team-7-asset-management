@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="col-6 d-flex flex-row-reverse">
-                <button class="button button--pan" (click)="goBack()">
+                <button class="btn btn-outline-dark" (click)="goBack()">
                     <span>
                         Back
                     </span>
@@ -79,21 +79,6 @@
                     Role is required
                 </div>
             </div>
-            <div class="row form-group mb-3">
-                <div class="col-2">
-                    <label>Enabled</label>
-                </div>
-                <div class="col-10">
-                    <select class="form-select" aria-label="Default select example" [(ngModel)]="modelUser.enabled"
-                        name="enabled" #enabled="ngModel">
-                        <option value="true">true</option>
-                        <option value="false">false</option>
-                    </select>
-                </div>
-                <div [hidden]="enabled.valid || enabled.pristine" class="alert alert-danger">
-                    Enabled is required
-                </div>
-            </div>
 
             <br>
             <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">
@@ -102,20 +87,6 @@
         </form>
     </div>
     <div [hidden]="!submitted">
-        <h2>Berikut adalah data yang sudah anda kirim</h2>
-        <div class="row">
-            <div class="col-xs-3">Name</div>
-            <div class="col-xs-9">{{modelUser.username}}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">Role</div>
-            <div class="col-xs-9">{{modelUser.role}}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">Enabled</div>
-            <div class="col-xs-9">{{modelUser.enabled}}</div>
-        </div>
-        <br>
-        <button type="button" class="btn btn-secondary" (click)="submitted=false">Back</button>
+        <h2>Success Add Data User</h2>
     </div>
 </div>

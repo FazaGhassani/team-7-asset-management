@@ -25,4 +25,10 @@ export class AssetService {
     const urlByID = `${this.assetUrl}/${id}`
     return this.http.delete<Asset>(urlByID, this.httpOptions)
   }
+  editAsset(asset: Asset): Observable<Asset> {
+    return this.http.put<Asset>(this.assetUrl + '/' + asset.id, asset, this.httpOptions);
+  }
+  getAssetById(id: string): Observable<Asset> {
+    return this.http.get<Asset>(this.assetUrl + '/' + id, this.httpOptions);
+  }
 }

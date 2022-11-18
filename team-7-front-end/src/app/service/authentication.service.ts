@@ -20,15 +20,8 @@ export class AuthenticationService {
     headers: new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': 'Basic ' + btoa('admin:ianianian') })
   }
   authenticate(username: string, password: string): Observable<Auth> {
-    return this.http.get<Auth>(this.authenticationUrl, this.httpOptions).pipe(
-      map(
-        userData => {
-          localStorage.setItem('username', username);
-          localStorage.setItem('password', password);
-          return userData;
-        }
-      )
-    )
+    const urlWithParam = `${this.authenticationUrl}/?username=${username}&password=${password}`
+    return this.http.get<Auth>(urlWithParam, this.httpOptions)
   }
   isUserLoggedIn() {
     let user = localStorage.getItem('username')
@@ -37,5 +30,6 @@ export class AuthenticationService {
   logout() {
     localStorage.removeItem('username')
     localStorage.removeItem('password')
+    localStorage.removeItem('role')
   }
 }

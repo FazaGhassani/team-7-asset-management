@@ -25,6 +25,9 @@ import { ReportParentComponent } from './report-parent/report-parent.component';
 import { ReportChildComponent } from './report-child/report-child.component';
 import { ReportDetailComponent } from './report-detail/report-detail.component';
 import { CheckoutUpdateComponent } from './checkout-update/checkout-update.component';
+import { AssetEditComponent } from './asset-edit/asset-edit.component';
+import { WarehouseEditComponent } from './warehouse-edit/warehouse-edit.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { CheckoutUpdateComponent } from './checkout-update/checkout-update.compo
     ReportParentComponent,
     ReportChildComponent,
     ReportDetailComponent,
-    CheckoutUpdateComponent
+    CheckoutUpdateComponent,
+    AssetEditComponent,
+    WarehouseEditComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
