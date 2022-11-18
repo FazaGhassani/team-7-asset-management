@@ -48,16 +48,21 @@ export class CheckoutAddComponent implements OnInit {
         res => {
           this.checkout1s.push(res);
           //redirect
-          this.router.navigateByUrl('/checkout', {skipLocationChange: true}).then(() => {
-            this.router.navigate(['/checkout']);
-          });},
+          this.redirectTo('/checkout');
+        },
         error => {
             if(error instanceof HttpErrorResponse){
               //Swal.fire()
-              //alert("ERROR! PASTIKAN DATA CHECKIN PADA ASSET DAN WAREHOUSE ADA!");
+              alert("ERROR! PASTIKAN DATA CHECKIN PADA ASSET DAN WAREHOUSE ADA!");
+              this.redirectTo('/checkout-add');
             }
          }
       );
+  }
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate([uri]));
   }
 
   getAssets(): void {
