@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
           localStorage.setItem('username', this.username);
           localStorage.setItem('password', this.password);
+          localStorage.setItem('role', data.status);
           this.router.navigate([''])
           this.invalidLogin = false
         }
