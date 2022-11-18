@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   checkLogin() {
     (this.loginService.authenticate(this.username, this.password).subscribe(
       data => {
-        console.log(data)
         if (data.status != "invalid") {
 
           localStorage.setItem('username', this.username);
@@ -30,7 +29,6 @@ export class LoginComponent implements OnInit {
         }
         else {
           this.invalidLogin = true
-          console.log(this.invalidLogin)
         }
       },
       error => {
