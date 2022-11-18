@@ -47,17 +47,21 @@ export class CheckinAddComponent implements OnInit {
     console.log(this.checkin);
     if(this.checkin == null){
       this.checkinService.addChekin({ id, asset_id, warehouse_id, tanggal_masuk, jumlah })
-        .subscribe(res => { this.checkin1s.push(res) });
+        .subscribe(res => { this.checkin1s.push(res); this.redirectTo('/checkin');},
+                   err => {alert("ERROR! Mohon dicek kembali"); this.redirectTo('/checkin-add')}
+        );
     }else{
       id = this.checkin.id;
       this.checkinService.editCheckin({id, asset_id, warehouse_id, tanggal_masuk, jumlah})
-        .subscribe(res=> {})
+        .subscribe(res=> { this.redirectTo('/checkin');},
+                   err=> {alert("ERROR! Mohon dicek kembali"); this.redirectTo('/checkin-add')}
+        );
     }
+  }
 
-    //redirect
-    this.router.navigateByUrl('/checkin', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/checkin']);
-    });
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate([uri]));
   }
 
   getAssets(): void {
