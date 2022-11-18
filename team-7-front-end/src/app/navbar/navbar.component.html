@@ -17,11 +17,11 @@
             <div class="col-6">
                 <div class="row">
                     <div class="col-10 d-flex flex-row">
-                        <a class="nav-link p-2" routerLink="/asset/">Asset</a>
-                        <a class="nav-link p-2" routerLink="/warehouse/">Warehouse</a>
-                        <a class="nav-link p-2" routerLink="/checkin/">CheckIn</a>
-                        <a class="nav-link p-2" routerLink="/checkout/">CheckOut</a>
-                        <a class="nav-link p-2" routerLink="/user/">User</a>
+                        <a class="nav-link p-2" routerLink="/asset/" *ngIf="role=='Admin'">Asset</a>
+                        <a class="nav-link p-2" routerLink="/warehouse/" *ngIf="role=='Admin'">Warehouse</a>
+                        <a class="nav-link p-2" routerLink="/checkin/" *ngIf="role=='Admin'">CheckIn</a>
+                        <a class="nav-link p-2" routerLink="/checkout/" *ngIf="role=='Admin'">CheckOut</a>
+                        <a class="nav-link p-2" routerLink="/user/" *ngIf="role=='Admin'">User</a>
                     </div>
                     <div class="col-2 d-flex">
                         <button class="float-end" (click)="logOut()">

@@ -7,7 +7,7 @@ import { AuthenticationService } from '../service/authentication.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  role = localStorage.getItem('role')
   constructor(private loginService: AuthenticationService) { }
 
   ngOnInit(): void {

@@ -55,7 +55,7 @@ public class UserController {
     public UserValidateResponse validateLogin(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password) {
         if(usersRepository.findByUsername(username)!= null){
             User user = usersRepository.findByUsername(username);
-            if(bCryptPasswordEncoder.matches(password,user.getPassword())) return new UserValidateResponse("User successfully authenticated");
+            if(bCryptPasswordEncoder.matches(password,user.getPassword())) return new UserValidateResponse(user.getRole());
         }
         return new UserValidateResponse("invalid");
     }
