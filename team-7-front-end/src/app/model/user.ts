@@ -1,16 +1,15 @@
 export interface User {
-    user_id: number,
+    id: number,
     username: string,
     password: string,
-    role: string,
-    enabled: boolean
+    role: string
 }
 
 export class UserModel {
     constructor(
+        public id: number,
         public username: string,
         public password: string,
-        public role: string,
-        public enabled: boolean
+        public role: string
     ) { }
 }

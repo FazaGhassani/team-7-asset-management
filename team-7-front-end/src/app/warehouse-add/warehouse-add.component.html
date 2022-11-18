@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="col-6 d-flex flex-row-reverse">
-                <button class="button button--pan" (click)="goBack()">
+                <button class="btn btn-outline-dark" (click)="goBack()">
                     <span>
                         Back
                     </span>
@@ -54,12 +54,6 @@
         </form>
     </div>
     <div [hidden]="!submitted">
-        <h2>Berikut adalah data yang sudah anda kirim</h2>
-        <div class="row">
-            <div class="col-xs-3">Name</div>
-            <div class="col-xs-9">{{modelWarehouse.name}}</div>
-        </div>
-        <br>
-        <button type="button" class="btn btn-secondary" (click)="submitted=false">Back</button>
+        <h2>Success Add Data Warehouse</h2>
     </div>
 </div>

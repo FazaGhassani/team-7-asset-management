@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="col-6 d-flex flex-row-reverse">
-                <button class="button button--pan" (click)="goBack()">
+                <button class="btn btn-outline-dark" (click)="goBack()">
                     <span>
                         Back
                     </span>
@@ -65,8 +65,9 @@
                     <label>Barcode</label>
                 </div>
                 <div class="col-10">
-                    <input type="text" class="form-control" id="barcode" required [(ngModel)]="modelAsset.barcode"
-                        placeholder="#018239482$21" name="barcode" #barcode="ngModel" />
+                    <input type="text" maxlength="15" class="form-control" id="barcode" required
+                        [(ngModel)]="modelAsset.barcode" placeholder="max 8 character" name="barcode"
+                        #barcode="ngModel" />
                 </div>
                 <div [hidden]="barcode.valid || barcode.pristine" class="alert alert-danger">
                     Barcode is required
@@ -79,20 +80,6 @@
         </form>
     </div>
     <div [hidden]="!submitted">
-        <h2>Berikut adalah data yang sudah anda kirim</h2>
-        <div class="row">
-            <div class="col-xs-3">Name</div>
-            <div class="col-xs-9">{{modelAsset.name}}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">Description</div>
-            <div class="col-xs-9">{{modelAsset.description}}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">Barcode</div>
-            <div class="col-xs-9">{{modelAsset.barcode}}</div>
-        </div>
-        <br>
-        <button type="button" class="btn btn-secondary" (click)="submitted=false">Back</button>
+        <h2>Success Add Data Asset</h2>
     </div>
 </div>

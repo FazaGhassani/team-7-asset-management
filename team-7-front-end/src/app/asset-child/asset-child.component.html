@@ -1,19 +1,24 @@
 <div class="row d-flex">
     <div class="col-4 p-2" *ngFor="let asset of assetChild">
         <div class="card p-2 shadow">
-            <div class="card-body text-center">
-                <!-- <img src="./assets/images/photo2.jpg" alt="avatar" class="rounded-circle img-fluid mb-3 shadow"
-                    style="width: 150px" /> -->
-                <div class="d-flex flex-row-reverse">
-                    <button class="" type="button" (click)="deleteAsset(asset.id)"><i class="bi bi-x-lg"></i></button>
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="d-flex flex-row-reverse">
+                        <button class="btn btn-outline-danger mx-1" type="button" (click)="deleteAsset(asset.id)"><i
+                                class="bi bi-x-lg"></i></button>
 
+                    </div>
+                    <img src="./assets/asset.png" alt="avatar" class="rounded-circle img-fluid mb-3 shadow"
+                        style="width: 150px" />
+                    <h5>{{asset.name}}</h5>
                 </div>
-                <h5>{{asset.name}}</h5>
-                <p>{{asset.description}}</p>
-                <p>{{asset.barcode}}</p>
-                <button type="update" class="btn btn-outline-success mx-1" (click)="update(asset.id)">
-                    UPDATE
-                </button>
+                <p>Description : {{asset.description}}</p>
+                <p>Barcode : {{asset.barcode}}</p>
+                <div class="text-center">
+                    <button type="update" class="btn btn-outline-success mx-1" (click)="update(asset.id)">
+                        UPDATE
+                    </button>
+                </div>
             </div>
         </div>
         <!-- <a routerLink="/freelancer-detail/{{cont.id}}"></a> -->

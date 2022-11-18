@@ -45,7 +45,7 @@
                         Description is required
                     </div>
                     <label for="barcode">Barcode</label>
-                    <input type="text" maxlength="8" class="form-control" id="barcode" required
+                    <input type="text" maxlength="15" class="form-control" id="barcode" required
                         [(ngModel)]="modelAsset.barcode" name="barcode" #barcode="ngModel" />
                     <div [hidden]="barcode.valid || barcode.pristine" class="alert alert-danger">
                         Barcode is required
