@@ -38,15 +38,17 @@
                     <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
                         Username is required
                     </div>
-                    <label for="password">Password</label>
+                    <!-- <label for="password">Password</label>
                     <input type="text" class="form-control" id="password" required [(ngModel)]="modelUser.password"
                         name="password" #password="ngModel" />
                     <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
                         Password is required
-                    </div>
+                    </div> -->
                     <label for="role">Role</label>
-                    <input type="text" maxlength="15" class="form-control" id="role" required
-                        [(ngModel)]="modelUser.role" name="role" #role="ngModel" />
+                    <select id="role" class="form-control" required [(ngModel)]="modelUser.role" name="role"
+                        #role="ngModel">
+                        <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+                    </select>
                     <div [hidden]="role.valid || role.pristine" class="alert alert-danger">
                         Role is required
                     </div>

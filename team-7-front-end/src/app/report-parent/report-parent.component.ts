@@ -10,6 +10,7 @@ import { ReportService } from '../service/report.service';
   styleUrls: ['./report-parent.component.css']
 })
 export class ReportParentComponent implements OnInit {
+  username = localStorage.getItem('username')
   namePage: string = "Report Menu"
   report: Report[] = []
   constructor(private reportService: ReportService, private location: Location, private route: ActivatedRoute) { }

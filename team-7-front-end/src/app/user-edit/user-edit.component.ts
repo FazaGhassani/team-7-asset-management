@@ -15,6 +15,7 @@ export class UserEditComponent implements OnInit {
   submitted = false
   user: User[] = []
   idUser: any
+  roles = ['Admin', 'Guest']
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
@@ -40,10 +41,12 @@ export class UserEditComponent implements OnInit {
     password: string = this.modelUser.password,
     role: string = this.modelUser.role
   ): void {
-    this.userService.editUser({ id, username, password, role }).subscribe(res => { this.user.push(res) })
-    this.router.navigateByUrl('/user/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/user'])
-    })
+    this.userService.editUser({ id, username, password, role }).subscribe(res => { this.user.push(res); this.redirectTo('/user') },
+      err => { alert("ERROR! Mohon dicek kembali"); this.redirectTo('/user-update/' + id) })
+  }
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([uri]));
   }
   onSubmit() {
     this.submitted = true;

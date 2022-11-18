@@ -42,10 +42,13 @@ export class AssetEditComponent implements OnInit {
     description: string = this.modelAsset.description,
     barcode: string = this.modelAsset.barcode
   ): void {
-    this.assetService.editAsset({ id, name, description, barcode }).subscribe(res => { this.asset.push(res) })
-    this.router.navigateByUrl('/asset/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/asset/'])
-    })
+    this.assetService.editAsset({ id, name, description, barcode }).subscribe(res => { this.asset.push(res); this.redirectTo('/asset') },
+      err => { alert("ERROR! Mohon dicek kembali"); this.redirectTo('/asset-update/' + id) })
+
+  }
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([uri]));
   }
   onSubmit() {
     this.submitted = true;
