@@ -14,14 +14,18 @@ import { UserAddComponent } from './user-add/user-add.component';
 import { ReportParentComponent } from './report-parent/report-parent.component';
 import { ReportDetailComponent } from './report-detail/report-detail.component';
 import { LoginComponent } from './login/login.component';
+import { AssetEditComponent } from './asset-edit/asset-edit.component';
+import { WarehouseEditComponent } from './warehouse-edit/warehouse-edit.component';
 
 const routes: Routes = [
   { path: '', component: ReportParentComponent },
   { path: 'report-detail', component: ReportDetailComponent },
   { path: 'asset', component: AssetParentComponent },
   { path: 'asset-add', component: AssetAddComponent },
+  { path: 'asset-update/:id', component: AssetEditComponent },
   { path: 'warehouse', component: WarehouseParentComponent },
   { path: 'warehouse-add', component: WarehouseAddComponent },
+  { path: 'warehouse-update/:id', component: WarehouseEditComponent },
   { path: 'user', component: UserParentComponent },
   { path: 'user-add', component: UserAddComponent },
   { path: 'checkin', component: CheckinParentComponent },

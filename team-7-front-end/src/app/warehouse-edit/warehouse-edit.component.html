@@ -1,1 +1,51 @@
-<p>warehouse-edit works!</p>
+<div class="row p-2 d-flex justify-content-center">
+    <div class="col card mb-3 shadow">
+        <div class="row card-body">
+            <div class="col-6">
+                <div class="row">
+                    <h4>{{namePage}}</h4>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <a routerLink="/warehouse">warehouse</a>
+                        >
+                        <span>Update Warehouse</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 d-flex flex-row-reverse">
+                <button type="button" class="btn btn-outline-dark" (click)="goBack()">
+                    <span>
+                        Back
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row p-2">
+    <div class="col card shadow p-3" [hidden]="submitted">
+        <h4 style="color: blue;">Update Warehouse Form</h4>
+        <h6>Input your Warehouse detail here</h6>
+        <br>
+        <form (ngSubmit)="onSubmit()" #warehouseForm="ngForm">
+            <div class="row form-group py-1">
+                <div class="col-5">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" required [(ngModel)]="modelWarehouse.name"
+                        name="name" #name="ngModel" />
+                    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                        Name is required
+                    </div>
+                    <div class="col-2 py-3">
+                        <button type="submit" class="btn btn-success" [disabled]="!warehouseForm.form.valid">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </form>
+    </div>
+</div>

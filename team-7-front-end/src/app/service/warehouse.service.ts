@@ -25,4 +25,10 @@ export class WarehouseService {
     const urlByID = `${this.warehouseUrl}/${id}`
     return this.http.delete<Warehouse>(urlByID, this.httpOptions)
   }
+  editWarehouse(warehouse: Warehouse): Observable<Warehouse> {
+    return this.http.put<Warehouse>(this.warehouseUrl + '/' + warehouse.id, warehouse, this.httpOptions);
+  }
+  getWarehouseById(id: string): Observable<Warehouse> {
+    return this.http.get<Warehouse>(this.warehouseUrl + '/' + id, this.httpOptions)
+  }
 }

@@ -11,6 +11,9 @@
                 <h5>{{asset.name}}</h5>
                 <p>{{asset.description}}</p>
                 <p>{{asset.barcode}}</p>
+                <button type="update" class="btn btn-outline-success mx-1" (click)="update(asset.id)">
+                    UPDATE
+                </button>
             </div>
         </div>
         <!-- <a routerLink="/freelancer-detail/{{cont.id}}"></a> -->

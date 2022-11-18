@@ -1,41 +1,18 @@
 <div class="row d-flex">
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are You Sure To Delete ?</h5> <button type="button"
-                        class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-                    <button type="button" class="btn btn-primary">DELETE</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="col-4 p-2" *ngFor="let warehouse of warehouseChild">
         <div class="card p-2 shadow">
             <div class="card-body text-center">
                 <!-- <img src="./assets/images/photo2.jpg" alt="avatar" class="rounded-circle img-fluid mb-3 shadow"
                     style="width: 150px" /> -->
                 <div class="d-flex flex-row-reverse">
-                    <button class="" type="button" name="warehouse" [(ngModel)]="warehouse.id" #warehouse="ngModel"
-                        data-toggle="modal" data-target="#exampleModalCenter"><i class="bi bi-x-lg"></i></button>
-
+                    <button class="" type="button" (click)="deleteWarehouse(warehouse.id)">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
                 </div>
-                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Launch demo modal
-                </a>
                 <h5>{{warehouse.name}}</h5>
-                <!-- <div class="d-flex view-contact bd-highlight">
-                    <a class="text p-2 w-100 bd-highlight" routerLink="/freelancer-detail/{{freelancer.id}}">
-                        VIEW PROFILE
-                    </a>
-                    <button class="p-2 flex-shrink-1 bd-highlight" type="button"
-                        (click)="deleteFreelancer(freelancer.id)">DELETE</button>
-
-                </div> -->
+                <button type="update" class="btn btn-outline-success mx-1" (click)="update(warehouse.id)">
+                    UPDATE
+                </button>
 
 
             </div>

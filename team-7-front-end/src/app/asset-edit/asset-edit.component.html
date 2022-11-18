@@ -1,1 +1,63 @@
-<p>asset-edit works!</p>
+<div class="row p-2 d-flex justify-content-center">
+    <div class="col card mb-3 shadow">
+        <div class="row card-body">
+            <div class="col-6">
+                <div class="row">
+                    <h4>{{namePage}}</h4>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <a routerLink="/asset">Asset</a>
+                        >
+                        <span>Update Asset</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 d-flex flex-row-reverse">
+                <button type="button" class="btn btn-outline-dark" (click)="goBack()">
+                    <span>
+                        Back
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row p-2">
+    <div class="col card shadow p-3" [hidden]="submitted">
+        <h4 style="color: blue;">Update Asset Form</h4>
+        <h6>Input your Asset detail here</h6>
+        <br>
+        <form (ngSubmit)="onSubmit()" #assetForm="ngForm">
+            <div class="row form-group py-1">
+                <div class="col-5">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" required [(ngModel)]="modelAsset.name" name="name"
+                        #name="ngModel" />
+                    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                        Name is required
+                    </div>
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" required
+                        [(ngModel)]="modelAsset.description" name="description" #description="ngModel" />
+                    <div [hidden]="description.valid || description.pristine" class="alert alert-danger">
+                        Description is required
+                    </div>
+                    <label for="barcode">Barcode</label>
+                    <input type="text" maxlength="8" class="form-control" id="barcode" required
+                        [(ngModel)]="modelAsset.barcode" name="barcode" #barcode="ngModel" />
+                    <div [hidden]="barcode.valid || barcode.pristine" class="alert alert-danger">
+                        Barcode is required
+                    </div>
+                    <div class="col-2 py-3">
+                        <button type="submit" class="btn btn-success" [disabled]="!assetForm.form.valid">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </form>
+    </div>
+</div>
