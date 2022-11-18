@@ -7,6 +7,7 @@ import {Warehouse} from "../model/warehouse";
 import { AssetService } from '../service/asset.service';
 import {WarehouseService} from "../service/warehouse.service";
 import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-checkin-add',
@@ -48,13 +49,15 @@ export class CheckinAddComponent implements OnInit {
     if(this.checkin == null){
       this.checkinService.addChekin({ id, asset_id, warehouse_id, tanggal_masuk, jumlah })
         .subscribe(res => { this.checkin1s.push(res); this.redirectTo('/checkin');},
-                   err => {alert("ERROR! Mohon dicek kembali"); this.redirectTo('/checkin-add')}
+                   err => {
+                     if(err instanceof HttpErrorResponse){alert("ERROR! Mohon dicek kembali"); this.redirectTo('/checkin-add')}}
         );
     }else{
       id = this.checkin.id;
       this.checkinService.editCheckin({id, asset_id, warehouse_id, tanggal_masuk, jumlah})
         .subscribe(res=> { this.redirectTo('/checkin');},
-                   err=> {alert("ERROR! Mohon dicek kembali"); this.redirectTo('/checkin-add')}
+                   err=> {
+                     if(err instanceof HttpErrorResponse){alert("ERROR! Mohon dicek kembali"); this.redirectTo('/checkin-add')}}
         );
     }
   }

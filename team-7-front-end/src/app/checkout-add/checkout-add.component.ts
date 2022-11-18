@@ -52,7 +52,6 @@ export class CheckoutAddComponent implements OnInit {
         },
         error => {
             if(error instanceof HttpErrorResponse){
-              //Swal.fire()
               alert("ERROR! PASTIKAN DATA CHECKIN PADA ASSET DAN WAREHOUSE ADA!");
               this.redirectTo('/checkout-add');
             }
