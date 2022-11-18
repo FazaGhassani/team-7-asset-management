@@ -12,6 +12,5 @@ public interface CheckInRepository extends JpaRepository<CheckIn,Integer> {
     int getJumlahByAssetandWarehouse(Integer  assetId, Integer  WarehouseId);
 
     //CheckIn getCheckInByAsset_IdAndWarehouse_Id(Integer asset, Integer warehouse);
-
     Optional<CheckIn> getCheckInByAsset_IdAndWarehouse_Id(Integer asset, Integer warehouse);
 }
