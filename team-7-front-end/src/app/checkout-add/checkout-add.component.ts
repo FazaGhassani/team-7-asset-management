@@ -7,6 +7,7 @@ import {Asset} from "../model/asset";
 import {Warehouse} from "../model/warehouse";
 import {AssetService} from "../service/asset.service";
 import {WarehouseService} from "../service/warehouse.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-checkout-add',
@@ -44,17 +45,19 @@ export class CheckoutAddComponent implements OnInit {
   ): void {
     this.checkoutService.addChekout({id, asset_id, warehouse_id, tanggal_keluar, jumlah})
       .subscribe(
-        res => {this.checkout1s.push(res)},
+        res => {
+          this.checkout1s.push(res);
+          //redirect
+          this.router.navigateByUrl('/checkout', {skipLocationChange: true}).then(() => {
+            this.router.navigate(['/checkout']);
+          });},
         error => {
-          this.error = error;
-          console.log(this.error);
-          alert("ERROR! PASTIKAN DATA CHECKIN PADA ASSET DAN WAREHOUSE ADA!")
-        }
+            if(error instanceof HttpErrorResponse){
+              //Swal.fire()
+              //alert("ERROR! PASTIKAN DATA CHECKIN PADA ASSET DAN WAREHOUSE ADA!");
+            }
+         }
       );
-    //redirect
-    this.router.navigateByUrl('/checkout', {skipLocationChange: true}).then(() => {
-      this.router.navigate(['/checkout']);
-    });
   }
 
   getAssets(): void {
