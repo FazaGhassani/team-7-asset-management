@@ -9,6 +9,8 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./user-child.component.css']
 })
 export class UserChildComponent implements OnInit {
+  username = localStorage.getItem('username')
+  role = localStorage.getItem('role')
   @Input() userChild!: User[]
   constructor(private userService: UserService, private router: Router) { }
   deleteUser(id: number): void {

@@ -10,6 +10,7 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./user-parent.component.css']
 })
 export class UserParentComponent implements OnInit {
+  username = localStorage.getItem('username')
   namePage: string = "User Menu"
   user: User[] = []
   constructor(private userService: UserService, private location: Location, private route: ActivatedRoute) { }
@@ -20,7 +21,7 @@ export class UserParentComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.userService.getUsers().subscribe(usr => this.user = usr)
+    this.userService.getUsers().subscribe(usr => { this.user = usr.filter((item) => item.username != this.username); })
   }
   goBack(): void {
     this.location.back()

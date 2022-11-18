@@ -36,10 +36,13 @@ export class WarehouseEditComponent implements OnInit {
     id: number = this.modelWarehouse.id,
     name: string = this.modelWarehouse.name
   ): void {
-    this.warehouseService.editWarehouse({ id, name }).subscribe(res => { this.warehouse.push(res) })
-    this.router.navigateByUrl('/warehouse', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/warehouse'])
-    })
+    this.warehouseService.editWarehouse({ id, name }).subscribe(res => { this.warehouse.push(res); this.redirectTo('/warehouse') },
+      err => { alert("ERROR! Mohon dicek kembali"); this.redirectTo('/warehouse-update/' + id) })
+
+  }
+  redirectTo(uri: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([uri]));
   }
   onSubmit() {
     this.submitted = true;
